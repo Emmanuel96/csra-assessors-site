@@ -12,6 +12,7 @@ passport.deserializeUser((id, done)=> {
     });
 });
 passport.use(
+  'local',
     new LocalStrategy({ usernameField: "email" }, (email, password, done) => {
         User.findOne({ email: email })
             .then(user => {

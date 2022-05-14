@@ -1,0 +1,35 @@
+<!Doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('../partials/head.ejs') %>
+    <link rel='stylesheet' href='/stylesheets/style.css' />  
+  </head>
+  <body>
+    <h1 class="text-3xl text-purple-600 p-8 font-bold">
+      HELLO ADMIN! REGISTER A NEW ASSESSOR ON THIS PAGE!
+    </h1>
+
+    <form id="register">
+      <div class="w-full">
+        <input class="w-1/2" type="text" id="fname" placeholder="enter assesors first name"/>
+      </div>
+
+      <div class="w-full">
+        <input class="w-1/2" type="text" id="lname" placeholder="enter assesors last name"/>
+      </div>
+
+      <div class="w-full">
+        <input class="w-1/2" type="email" id="email" placeholder="enter assesors email"/>
+      </div>
+
+      <div class="w-full">
+        <input class="w-1/2" type="password" id="password" placeholder="enter assesors password"/>
+      </div>
+
+      <button type="button" onclick="registerAssessor()">Register</button>
+    </form>
+    <script src="/javascripts/auth/assessor_register.js"></script>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+<!Doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('../partials/head.ejs') %>
+    <link rel='stylesheet' href='/stylesheets/style.css' />  
+  </head>
+  <body>
+    <h1 class="text-3xl text-pink-600 p-8 font-bold">
+      LOGIN PAGE!
+    </h1>
+
+    <form id="">  
+      <div>
+        <input type="email" id="email" placeholder="enter email"/>
+      </div>
+
+      <div>
+        <input type="password" id="password" placeholder="enter password"/>
+      </div>
+
+      <button type="button" onclick="login()">Login as Admin</button>
+      <!-- <button type="button" onclick="assessorLogin()">Login as Assessor</button> -->
+    </form>
+  </body>
+  <script src="/javascripts/auth/login.js"></script>
+</html>

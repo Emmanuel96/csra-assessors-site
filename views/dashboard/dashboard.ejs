@@ -1,0 +1,20 @@
+<!Doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('../partials/head.ejs') %>
+    <link rel='stylesheet' href='/stylesheets/style.css' />  
+  </head>
+  <body>
+    <h1 class="text-3xl text-blue-800 p-8 font-bold">
+      DASHBOARD PAGE!
+    </h1>
+
+    <form class="h-full" action="/api/auth/logout?_method=DELETE" method="POST">
+      <button type="submit" class="font-mono bg h-full hover:text-gray-200 font-bold px-3 text-[#302f2f] hover:bg-[#03857e] bg-gray-300">
+        Logout
+      </button>
+    </form>
+  </body>
+</html>
