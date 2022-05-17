@@ -109,9 +109,10 @@ exports.post_register_assessor = (req, res, next) => {
 exports.post_forgot_password = async (req, res, next) => {
   const token = (await promisify(crypto.randomBytes)(20)).toString('hex')
 
-  User.findOne({emai: req.body.email}).then(user => {
+  User.findOne({email: req.body.email}).then(user => {
     if(!user){
       return res.status(404).json({
+        success: false,
         message: "No user with this email exists"
       })
     }
@@ -127,8 +128,8 @@ exports.post_forgot_password = async (req, res, next) => {
     const resetEmail = {
       to: 'stephenbuluswayar@gmail.com',
       from: 'emmanuel@csr-accreditation.co.uk',
-      subject: 'Password Reset',
-      html: `You are receiving this because you (or someone else) have requested to reset the password to your account. <br> Please click on the following link, or paste this into your browser to complete the process: <br> <br> http://${req.headers.host}/reset_password/${token} <br> <br> If you did not request this, please ignore this email and your password will remain unchanged.
+      subject: 'Your Password Reset Link',
+      html: `Hi ${user.firstName} <br> You are receiving this mail because you (or someone else) have requested to reset the password to your account. <br> Please click on the following link, or paste this into your browser to complete the process: <br> <br> http://${req.headers.host}/reset_password/${token} <br> <br> If you did not request this, please ignore this email and your password will remain unchanged.
       `
     }
 
@@ -160,12 +161,7 @@ exports.post_reset_password = (req, res, next) => {
 
     console.log(thisUser)
 
-    if (!thisUser) {
-      return res
-        .status(404)
-        .send(`<h1>Password reset token is invalid or has expired.</h1>`)
-        .end()
-    }
+    if (!thisUser) return res.status(404).end()
 
     bcrypt.genSalt(10, (err, salt) => {
       bcrypt.hash(req.body.password, salt, (err, hash) => {
@@ -195,7 +191,7 @@ exports.post_reset_password = (req, res, next) => {
           const newPasswordConfirmation = {
             to: 'stephenbuluswayar@gmail.com',
             from: 'emmanuel@csr-accreditation.co.uk',
-            subject: 'Password Change Confirmation',
+            subject: 'Password Reset Successful!',
             html: `This is a confirmation that the password for your account "${thisUser.email}" has just been changed.
             `
           }
@@ -238,10 +234,19 @@ exports.get_reset_password = (req, res, next) => {
     if (!thisUser) {
       return res
         .status(404)
-        .send(`<h1>Password reset token is invalid or has expired.</h1>`)
+        .send(`
+        <div style="text-align: center;">
+          <h1 style="font-size: 1.87rem; color: #555A6E; padding: 2.5rem; font-weight: bold;" >
+          Password reset token is invalid or has <span style="color: rgb(146, 29, 29)">expired.</span>
+          </h1>
+    
+          <button style="border: none; background-color: #00A19A; padding-top: 0.75rem; padding-bottom: 0.75rem; padding-left: 1.7rem; padding-right: 1.7rem; border-radius: 0.25rem; color: white;">
+            <a style="text-decoration: none; color: white" href="/forgot_password">Request new link</a
+          </button>
+        </div>
+        `)
         .end()
     }
-
     res.render('auth/reset_password')
   })
 }

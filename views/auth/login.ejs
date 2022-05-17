@@ -1,28 +1,45 @@
 <!Doctype html>
 <html>
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSRA | Login</title>
     <%- include('../partials/head.ejs') %>
-    <link rel='stylesheet' href='/stylesheets/style.css' />  
+    <link rel='stylesheet' href='/stylesheets/style.css' /> 
   </head>
-  <body>
-    <h1 class="text-3xl text-pink-600 p-8 font-bold">
-      LOGIN PAGE!
-    </h1>
+  <body class="bg-gray-50">
+    <div class="mx-auto max-w-[30rem] md:max-w-[32rem]">
+      <div class="mx-4">
+        <div class="text-center mt-10 sm:mt-20 md:mt-24 xl:mt-30">
+          <h1 class="font-bold font-mono text-2xl text-[#514C4C]">CSR ACCREDITATION</h1>
+        </div>
+  
+        <div class="border-[#CCCCCC] bg-white rounded-md border mx-auto mt-8 xl:px-3 pt-7 pb-10">
+          <h1 class="text-center text-2xl text-[#555A6E]">Login</h1>
+  
+          <form class="text-[#373737]">
+            <div class="mx-7 mt-4">
+              <input id="email" class="focus:outline-[#00A19A] border w-full mt-2 p-4 h-12 border-[#CCCCCC] rounded-lg py-1 px-3 placeholder:text-xs" type="text" placeholder="Enter email address">
+            </div>
 
-    <form id="">  
-      <div>
-        <input type="email" id="email" placeholder="enter email"/>
+            <div class="border rounded-lg mt-5 mx-7 flex justify-between border-[#CCCCCC]">
+              <input id="password" class="focus:outline-none w-full ml-1 p-4 h-12  py-1 px-3 placeholder:text-xs" type="password" placeholder="Enter password">
+              <span onclick="toggleShowPassword()" class="text-xs cursor-pointer mt-4 mr-4">
+                <img class="w-5" src="../assets/images/eye-icon.svg" alt="eye-icon" />
+              </span>
+            </div>
+  
+            <div class="mx-7 mt-4 flex justify-between text-[#514C4C] font-light text-xs">              
+              <div>
+                <p class="text-[#514C4C] hover:underline"><a href="/forgot_password">Forgot password?</a></p>
+              </div>
+            </div>
+  
+            <div class="my-7 mx-4 px-3 lg:mt-7">
+              <button id="login_btn" onclick="login()" type="submit" class="bg-[#00A19A] py-3 px-2 text-sm lg:text-base rounded shadow-sm hover:bg-[#17908a] w-full text-white transition duration-100 delay-75 ease-linear" value="login">LOGIN</button>  
+            </div>
+          </form>
+        </div>
       </div>
-
-      <div>
-        <input type="password" id="password" placeholder="enter password"/>
-      </div>
-
-      <button type="button" onclick="login()">Login as Admin</button>
-      <!-- <button type="button" onclick="assessorLogin()">Login as Assessor</button> -->
-    </form>
+    </div>
+    <script src="/javascripts/auth/login.js"></script>
   </body>
-  <script src="/javascripts/auth/login.js"></script>
 </html>

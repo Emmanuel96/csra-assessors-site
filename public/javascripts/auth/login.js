@@ -4,20 +4,56 @@ function login(){
   let email = document.getElementById('email').value 
   let password = document.getElementById('password').value
 
-  var data = {email, password}
-
-  fetch('/api/auth/login', {
-    method: "POST", 
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: "application/json",
-    }, 
-    body: JSON.stringify(data)
-  }).then(data => (
-    data.json()
+  if (!email || !password) {
+    Swal.fire({
+      title: "Please enter email and password",
+      confirmButtonColor: "#00a19a",
+    })
+  }else if (!/\S+@\S+\.\S+/.test(email)){
+    Swal.fire({
+      title: "Please enter a valid email",
+      confirmButtonColor: "#00a19a",
+    })
+  }else{
+    document.getElementById('login_btn').innerText = "Logging in..."
+    document.getElementById('login_btn').disabled = true
+  
+    var data = {email, password}
+  
+    fetch('/api/auth/login', {
+      method: "POST", 
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: "application/json",
+      }, 
+      body: JSON.stringify(data)
+    }).then(data => (
+      data.json()
     )).then(res => {
-    console.log("Welcome ", res.role)
-  }).catch(error => {
-    console.log("Wrong admin credentials")
-  })
+      if(res){
+        document.getElementById('login_btn').innerText = `Welcome ${res.role}`
+  
+        setTimeout(() => {
+          window.location.href = 'dashboard'
+        }, 500)
+      }
+    }).catch(() => {
+      Swal.fire({
+        title: "Email or Password is incorrect",
+        confirmButtonColor: "#00a19a",
+      })
+  
+      document.getElementById('login_btn').innerText = "Login"
+      document.getElementById('login_btn').disabled = false
+    })
+  }
+}
+
+function toggleShowPassword() {
+  var x = document.getElementById("password");
+  if (x.type === "password") {
+    x.type = "text";
+  } else{
+    x.type = "password";
+  }
 }

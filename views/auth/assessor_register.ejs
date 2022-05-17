@@ -1,35 +1,54 @@
 <!Doctype html>
 <html>
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSRA | Register Assessor</title>
     <%- include('../partials/head.ejs') %>
     <link rel='stylesheet' href='/stylesheets/style.css' />  
   </head>
-  <body>
-    <h1 class="text-3xl text-purple-600 p-8 font-bold">
-      HELLO ADMIN! REGISTER A NEW ASSESSOR ON THIS PAGE!
-    </h1>
+  <body class="bg-gray-50">
+    <div class="mx-auto max-w-[30rem] md:max-w-[32rem]">
+      <div class="mx-4">
+        <div class="text-center mt-10 sm:mt-20 md:mt-24 xl:mt-30">
+          <h1 class="font-bold font-mono text-2xl text-[#514C4C]">CSR ACCREDITATION</h1>
+        </div>
+  
+        <div class="border-[#CCCCCC] bg-white rounded-md border mx-auto mt-8 xl:px-3 pt-7 mb-20 pb-10">
+          <h1 class="text-center text-xl text-[#514C4C]">Register New Assessor</h1>
+  
+          <form class="text-[#373737]">
+            <div class="mt-7 mx-7 flex justify-between space-x-4">
+              <input id="firstName" class="focus:outline-[#00A19A] border w-full mt-2 p-4 h-12 border-[#CCCCCC] rounded-lg py-1 px-3 placeholder:text-xs" type="text" placeholder="Enter assessor's first name">
 
-    <form id="register">
-      <div class="w-full">
-        <input class="w-1/2" type="text" id="fname" placeholder="enter assesors first name"/>
+              <input id="lastName" class="focus:outline-[#00A19A] border w-full mt-2 p-4 h-12 border-[#CCCCCC] rounded-lg py-1 px-3 placeholder:text-xs" type="text" placeholder="Enter assessor's last name">
+            </div>
+            
+            <div class="mx-7 mt-4">
+              <input id="email" class="focus:outline-[#00A19A] border w-full mt-2 p-4 h-12 border-[#CCCCCC] rounded-lg py-1 px-3 placeholder:text-xs" type="email" placeholder="Enter assessor's email address">
+            </div>
+
+            <div class="border rounded-lg mt-5 mx-7 flex justify-between border-[#CCCCCC]">
+              <input id="password" class="focus:outline-none w-full ml-1 p-4 h-12  py-1 px-3 placeholder:text-xs" type="password" placeholder="Enter assessor's password">
+              <span onclick="toggleShowPassword()" class="text-xs cursor-pointer mt-4 mr-4">
+                <img class="w-5" src="../assets/images/eye-icon.svg" alt="eye-icon" />
+              </span>
+            </div>
+
+            <div class="border rounded-lg mt-5 mx-7 flex justify-between border-[#CCCCCC]">
+              <input id="confirm_password" class="focus:outline-none w-full ml-1 p-4 h-12  py-1 px-3 placeholder:text-xs" type="password" placeholder="Confirm password">
+              <span onclick="toggleShowConfirmPassword()" class="text-xs cursor-pointer mt-4 mr-4">
+                <img class="w-5" src="../assets/images/eye-icon.svg" alt="eye-icon" />
+              </span>
+            </div>
+
+            <div class="mt-7 mb-10 mx-4 px-3 lg:mt-7">
+              <button onclick="registerAssessor()" id="reg_btn" type="button" class="bg-[#00A19A] py-3 px-2 text-sm lg:text-base rounded shadow-sm hover:bg-[#17908a] w-full text-white" value="login">REGISTER</button>  
+
+              <p class="text-[#373737] font-light text-sm text-center pt-5"><a class="hover:underline" href="/dashboard">Go to dashboard</a></p>
+            </div>
+          </form>
+        </div>
       </div>
-
-      <div class="w-full">
-        <input class="w-1/2" type="text" id="lname" placeholder="enter assesors last name"/>
-      </div>
-
-      <div class="w-full">
-        <input class="w-1/2" type="email" id="email" placeholder="enter assesors email"/>
-      </div>
-
-      <div class="w-full">
-        <input class="w-1/2" type="password" id="password" placeholder="enter assesors password"/>
-      </div>
-
-      <button type="button" onclick="registerAssessor()">Register</button>
-    </form>
+    </div>
     <script src="/javascripts/auth/assessor_register.js"></script>
   </body>
 </html>
