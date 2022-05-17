@@ -24,8 +24,14 @@ const UserSchema = new mongoose.Schema({
       'admin',
       'assessor'
     ]
+  },
+  resetPasswordToken: {
+    type: String
+  },
+  resetPasswordExpires: {
+    type: Date
   }
-});
+}, { timestamps: true });
 
 UserSchema.set('toJSON', {
   transform: (document, returnedObject) => {

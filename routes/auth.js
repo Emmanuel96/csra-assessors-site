@@ -6,6 +6,12 @@ const checkAuthenticated = require('../passport/checkAuthenticated')
 const isAdmin = require('../passport/isAdmin')
 const passport = require('../passport/setup')
 
+//DELETE routes
+Router.delete('/api/auth/logout', (req, res) => {
+  req.logOut()
+  res.redirect('/login')
+})
+
 //POST routes
 Router.post('/api/auth/login',
   passport.authenticate('local', { 
@@ -21,13 +27,7 @@ Router.post('/api/auth/register/assessor', AuthController.post_register_assessor
 
 Router.post('/api/auth/forgot_password', AuthController.post_forgot_password)
 
-Router.post('/api/auth/reset_password', AuthController.post_reset_password)
-
-//DELETE routes
-Router.delete('/api/auth/logout', (req, res) => {
-  req.logOut()
-  res.redirect('/login')
-})
+Router.post('/api/auth/reset_password/:token', AuthController.post_reset_password)
 
 //GET routes
 Router.get('/register/admin', checkNotAuthenticated, AuthController.get_admin_register)
@@ -38,6 +38,6 @@ Router.get('/login', checkNotAuthenticated, AuthController.get_login)
 
 Router.get('/forgot_password', checkNotAuthenticated, AuthController.get_forgot_password)
 
-Router.get('/reset_password', checkAuthenticated, AuthController.get_reset_password)
+Router.get('/reset_password/:token', AuthController.get_reset_password)
 
 module.exports = Router
