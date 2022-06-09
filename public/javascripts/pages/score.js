@@ -7,27 +7,27 @@ axios.get(`/api/application_score/${applicationID}`).then(score => {
 
   document.getElementById('social_benefit_score').value = score.data.social_benefit_score
 
-  document.getElementById('staff_benefit_score').value = score.data.
+  document.getElementById('staff_benefit_score').value = score.data.staff_benefit_score
 
-  document.getElementById('wrk_benefit_score').value = score.data. 
+  document.getElementById('wrk_benefit_score').value = score.data.workplace_benefit_score
 
-  document.getElementById('charitable_benefit_score').value = score.data.
+  document.getElementById('charitable_benefit_score').value = score.data.charitable_benefit_score
 
-  document.getElementById('financial_benefit_score').value = score.data.
+  document.getElementById('financial_benefit_score').value = score.data.financial_benefit_score
 
-  document.getElementById('commitment_score').value = score.data.
+  document.getElementById('commitment_score').value = score.data.commitment_score
 
-  document.getElementById('evidence_score').value = score.data. 
+  document.getElementById('evidence_score').value = score.data.evidence_score
 
-  document.getElementById('degree_of_originality_score').value = score.data.
+  document.getElementById('degree_of_originality_score').value = score.data.degree_of_originality_score
 
-  document.getElementById('future_expansion_score').value = score.data. 
+  document.getElementById('future_expansion_score').value = score.data.future_expansion_score
 
-  document.getElementById('replicability').value = score.data. 
+  document.getElementById('replicability').value = score.data.replicability_score
 
-  document.getElementById('special_merit_score').value = score.data.
+  document.getElementById('special_merit_score').value = score.data.special_merit_score
 
-  document.getElementById('comment').value = score.data. 
+  document.getElementById('comment').value = score.data.comment
 })
 
 function submitScore() {
