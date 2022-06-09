@@ -1,8 +1,9 @@
-const User = require('../models/User')
+const Admin = require('../models/Admin')
 const bcrypt = require('bcryptjs')
 const crypto = require('crypto')
 const { promisify } = require('util')
 const sgMail = require('@sendgrid/mail')
+const logger = require('../utils/logger')
 
 exports.post_register_admin = (req, res, next) => {
   let firstName = req.body.firstName
@@ -11,17 +12,17 @@ exports.post_register_admin = (req, res, next) => {
   let password = req.body.password
   let role = 'admin'
 
-  User.findOne({ email: email }).then(admin => {
+  Admin.findOne({ email: email }).then(admin => {
     if(admin){
-      console.log("There is an admin/assessor registered with this email already")
-      
+      logger.info("There is an admin/assessor registered with this email already")
+
       return res.status(400).json({
         success: false,
         message: "There is an admin/assessor registered with this email already"
       })
     }
-  
-    const newAdminUser = new User({
+
+    const newAdmin = new Admin({
       firstName,
       lastName,
       email,
@@ -30,20 +31,22 @@ exports.post_register_admin = (req, res, next) => {
     })
 
     bcrypt.genSalt(10, (err, salt) => {
-      bcrypt.hash(newAdminUser.password, salt, (err, hash) => {
+      bcrypt.hash(newAdmin.password, salt, (err, hash) => {
         if (err) throw err
 
-        newAdminUser.password = hash
+        newAdmin.password = hash
 
-        newAdminUser.save().then(() => {
-          console.log("Successfully registered admin")
+        newAdmin.save().then(() => {
+
+          logger.info("Successfully registered admin")
 
           res.status(200).json({
             success: true,
             message: "Successfully registered admin"
           })
         }).catch(error => {
-          console.log("Failed to register admin", error)
+
+          logger.error("Failed to register admin", error)
 
           res.status(400).json({
             success: false,
@@ -62,17 +65,17 @@ exports.post_register_assessor = (req, res, next) => {
   let password = req.body.password
   let role = 'assessor'
 
-  User.findOne({ email: email }).then(assessor => {
+  Admin.findOne({ email: email }).then(assessor => {
     if(assessor){
-      console.log("There is an admin/assessor registered with this email already")
-      
+      logger.info("There is an admin/assessor registered with this email already")
+
       return res.status(400).json({
         success: false,
         message: "There is an admin/assessor registered with this email already"
       })
     }
-  
-    const newAssessorUser = new User({
+
+    const newAssessor = new Admin({
       firstName,
       lastName,
       email,
@@ -81,20 +84,20 @@ exports.post_register_assessor = (req, res, next) => {
     })
 
     bcrypt.genSalt(10, (err, salt) => {
-      bcrypt.hash(newAssessorUser.password, salt, (err, hash) => {
+      bcrypt.hash(newAssessor.password, salt, (err, hash) => {
         if (err) throw err
 
-        newAssessorUser.password = hash
+        newAssessor.password = hash
 
-        newAssessorUser.save().then(() => {
-          console.log("Successfully registered assessor")
+        newAssessor.save().then(() => {
+          logger.info("Successfully registered assessor")
 
           res.status(200).json({
             success: true,
             message: "Successfully registered assessor"
           })
         }).catch(error => {
-          console.log("Failed to register assessor", error)
+          logger.error("Failed to register assessor", error)
 
           res.status(400).json({
             success: false,
@@ -109,7 +112,7 @@ exports.post_register_assessor = (req, res, next) => {
 exports.post_forgot_password = async (req, res, next) => {
   const token = (await promisify(crypto.randomBytes)(20)).toString('hex')
 
-  User.findOne({email: req.body.email}).then(user => {
+  Admin.findOne({ email: req.body.email }).then(user => {
     if(!user){
       return res.status(404).json({
         success: false,
@@ -134,14 +137,14 @@ exports.post_forgot_password = async (req, res, next) => {
     }
 
     sgMail.send(resetEmail).then(() => {
-      console.log('Reset link was sent to your email address')
+      logger.info('Reset link was sent to your email address')
 
       res.status(200).json({
         success: true,
         message: "Reset link was sent to your email address"
       })
     }).catch(error => {
-      console.log(error)
+      logger.error(error)
 
       res.status(400).json({
         success: false,
@@ -154,12 +157,12 @@ exports.post_forgot_password = async (req, res, next) => {
 exports.post_reset_password = (req, res, next) => {
   let usersArray = []
 
-  User.find({}).then((users) => {
+  Admin.find({}).then((users) => {
     usersArray = users
 
     const thisUser = usersArray.find(user => user.resetPasswordExpires > Date.now() && crypto.timingSafeEqual(Buffer.from(user.resetPasswordToken), Buffer.from(req.params.token)))
 
-    console.log(thisUser)
+    logger.info(thisUser)
 
     if (!thisUser) return res.status(404).end()
 
@@ -169,15 +172,17 @@ exports.post_reset_password = (req, res, next) => {
 
         req.body.password = hash
 
-        let filter = { emai: thisUser.email}
-        let password = {
+        let filter = { email: thisUser.email }
+        let update = {
           password: req.body.password,
           resetPasswordToken: null,
           resetPasswordExpires: null
         }
-    
-        User.findOneAndUpdate(filter, password).then(() => {
-          console.log("Successfull password reset!")
+
+        Admin.findOneAndUpdate(filter, update).then((feedback) => {
+          logger.info(feedback)
+
+          logger.info("Successfull password reset!")
 
           res.status(200).json({
             success: true,
@@ -187,7 +192,7 @@ exports.post_reset_password = (req, res, next) => {
           const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY
 
           sgMail.setApiKey(SENDGRID_API_KEY)
-      
+
           const newPasswordConfirmation = {
             to: 'stephenbuluswayar@gmail.com',
             from: 'emmanuel@csr-accreditation.co.uk',
@@ -197,13 +202,19 @@ exports.post_reset_password = (req, res, next) => {
           }
 
           sgMail.send(newPasswordConfirmation).then(() => {
-            console.log("Password confirmation sent")
-          }).catch(err => console.log("Failed to send confirmation", err))
+            logger.info("Password confirmation sent")
+          }).catch(err => logger.error("Failed to send confirmation", err))
 
-        }).catch(() => console.log("Failed to update")) 
+        }).catch((err) => {
+          res.status(400).json({
+            success: false,
+            message: "Failed to update"
+          })
+          logger.error("Failed to update: ", err)
+        })
       })
-    })  
-  })  
+    })
+  })
 }
 
 //GET controllers
@@ -226,7 +237,7 @@ exports.get_forgot_password = (req, res, next) => {
 exports.get_reset_password = (req, res, next) => {
   let usersArray = []
 
-  User.find({}).then((users) => {
+  Admin.find({}).then((users) => {
     usersArray = users
 
     const thisUser = usersArray.find(user => user.resetPasswordExpires > Date.now() && crypto.timingSafeEqual(Buffer.from(user.resetPasswordToken), Buffer.from(req.params.token)))

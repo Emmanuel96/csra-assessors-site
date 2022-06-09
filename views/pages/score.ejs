@@ -1,0 +1,229 @@
+<!Doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('../partials/head.ejs') %>
+    <link rel='stylesheet' href='/stylesheets/style.css' />  
+  </head>
+  <body>
+    <!-- Top nav start -->
+    <div class="shadow-lg px-28 h-16 pt-[0.7rem] sticky top-0 bg-white">
+      <div class="flex justify-end">
+        <form class="h-full" action="/api/auth/logout?_method=DELETE" method="POST">
+          <button class="py-[0.5rem] px-5 ml-3 bg-[#00A19A] text-white hover:bg-[#0b8781] font-bold transition delay-75 duration-75 ease-linear hover:shadow-sm rounded-md">
+            Logout
+          </button>
+        </form>  
+      </div>
+    </div>
+    <!-- Top nav end -->
+
+    <div class="mx-auto w-full px-10 mt-10 mb-20">
+      <div class="mx-auto max-w-[75rem]">
+        <div class="rounded-md pt-10 border border-[#bdbcbc]">
+          <div class="flex justify-between pt-10 px-10">
+            <h1 class="text-3xl text-[#00a19a]">CSR Accreditation</h1>
+  
+            <img class="md:w-40 md:h-auto h-20 w-20" src="../images/CSR-A_Logo-RGB.jpeg" alt="" />
+          </div>
+  
+          <div class="text-lg mt-16  px-10">
+            <div class="grid grid-cols-3 mt-5">
+              <div class="col-start-1 col-end-3">
+                <p>1. CSR Benefit</p>
+  
+                <p class="ml-4 mt-3">Does the policy identify clear CSR benefit?</p>
+              </div>
+  
+              <div class="col-start-3 col-end-4">
+                <div class="flex justify-end space-x-2">
+                  <input id="csr_benefit_score" class="h-10 rounded-lg px-2 w-28 border-2 border-[#00a19a] placeholder:text-sm placeholder:italic" placeholder="Enter score" type="number"/>
+                </div>
+              </div>
+            </div>
+  
+            <div class="grid grid-cols-3 mt-5">
+              <div class="col-start-1 col-end-3">
+                <p>2.  Environmental Benefits</p>
+  
+                <p class="ml-4 mt-3">Does the policy clearly identify areas to improve environmental impact? Energy Efficiency, Wastes Minimisation, Recycling</p>
+              </div>
+  
+              <div class="col-start-3 col-end-4">
+                <div class="flex justify-end space-x-2">
+                  <input id="env_benefit_score" class="h-10 rounded-lg px-2 w-28 border-2 border-[#00a19a] placeholder:text-sm placeholder:italic" placeholder="Enter score" type="number"/>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-3 mt-5">
+              <div class="col-start-1 col-end-3">
+                <p>3.  Social Benefit</p>
+  
+                <p class="ml-4 mt-3">Value to the community have communities or areas benefited?</p>
+              </div>
+  
+              <div class="col-start-3 col-end-4">
+                <div class="flex justify-end space-x-2">
+                  <input id="social_benefit_score" class="h-10 rounded-lg px-2 w-28 border-2 border-[#00a19a] placeholder:text-sm placeholder:italic" placeholder="Enter score" type="number"/>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-3 mt-5">
+              <div class="col-start-1 col-end-3">
+                <p>4.  Staff Benefit</p>
+  
+                <p class="ml-4 mt-3">Have staff been engaged, included, trained or otherwise benefited?</p>
+              </div>
+  
+              <div class="col-start-3 col-end-4">
+                <div class="flex justify-end space-x-2">
+                  <input id="staff_benefit_score" class="h-10 rounded-lg px-2 w-28 border-2 border-[#00a19a] placeholder:text-sm placeholder:italic" placeholder="Enter score" type="number"/>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-3 mt-5">
+              <div class="col-start-1 col-end-3">
+                <p>5.  Workplace Benefit</p>
+  
+                <p class="ml-4 mt-3">Do you provide responsible product information and services, supply chain, ethical investment and fair trade etc.</p>
+              </div>
+  
+              <div class="col-start-3 col-end-4">
+                <div class="flex justify-end space-x-2">
+                  <input id="wrk_benefit_score" class="h-10 rounded-lg px-2 w-28 border-2 border-[#00a19a] placeholder:text-sm placeholder:italic" placeholder="Enter score" type="number"/>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-3 mt-5">
+              <div class="col-start-1 col-end-3">
+                <p>6.  Charitable Benefit</p>
+  
+                <p class="ml-4 mt-3">Does the policy support charitable giving financially or through services and volunteering ?</p>
+              </div>
+  
+              <div class="col-start-3 col-end-4">
+                <div class="flex justify-end space-x-2">
+                  <input id="charitable_benefit_score" class="h-10 rounded-lg px-2 w-28 border-2 border-[#00a19a] placeholder:text-sm placeholder:italic" placeholder="Enter score" type="number"/>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-3 mt-5">
+              <div class="col-start-1 col-end-3">
+                <p>7.  Financial Benefit</p>
+  
+                <p class="ml-4 mt-3">Have reductions or savings been achieved? Reduced operating costs, electricity, water, travel etc.</p>
+              </div>
+  
+              <div class="col-start-3 col-end-4">
+                <div class="flex justify-end space-x-2">
+                  <input id="financial_benefit_score" class="h-10 rounded-lg px-2 w-28 border-2 border-[#00a19a] placeholder:text-sm placeholder:italic" placeholder="Enter score" type="number"/>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-3 mt-5">
+              <div class="col-start-1 col-end-3">
+                <p>8.  Commitment of the entrants/ Involvement of relevant stakeholders and employee</p>
+  
+                <p class="ml-4 mt-3">Have staff demonstrated their commitment?</p>
+              </div>
+  
+              <div class="col-start-3 col-end-4">
+                <div class="flex justify-end space-x-2">
+                  <input id="commitment_score" class="h-10 rounded-lg px-2 w-28 border-2 border-[#00a19a] placeholder:text-sm placeholder:italic" placeholder="Enter score" type="number"/>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-3 mt-5">
+              <div class="col-start-1 col-end-3">
+                <p>9.  Evidence of measurable impact/benefits (environmental, social and financial)</p>
+                </div>
+  
+              <div class="col-start-3 col-end-4">
+                <div class="flex justify-end space-x-2">
+                  <input id="evidence_score" class="h-10 rounded-lg px-2 w-28 border-2 border-[#00a19a] placeholder:text-sm placeholder:italic" placeholder="Enter score" type="number"/>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-3 mt-5">
+              <div class="col-start-1 col-end-3">
+                <p>10. Degree of originality/innovation</p>
+  
+                <p class="ml-4 mt-3">Have you developed new or novel solutions to problems?</p>
+              </div>
+  
+              <div class="col-start-3 col-end-4">
+                <div class="flex justify-end space-x-2">
+                  <input id="degree_of_originality_score" class="h-10 rounded-lg px-2 w-28 border-2 border-[#00a19a] placeholder:text-sm placeholder:italic" placeholder="Enter score" type="number"/>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-3 mt-5">
+              <div class="col-start-1 col-end-3">
+                <p>11. Future expansion of the scheme How do they intend to move forward?</p>
+                </div>
+  
+              <div class="col-start-3 col-end-4">
+                <div class="flex justify-end space-x-2">
+                  <input id="future_expansion_score" class="h-10 rounded-lg px-2 w-28 border-2 border-[#00a19a] placeholder:text-sm placeholder:italic" placeholder="Enter score" type="number"/>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-3 mt-5">
+              <div class="col-start-1 col-end-3">
+                <p>12. Replicability</p>
+  
+                <p class="ml-4 mt-3">Can others adopt the procedures to their own benefit?</p>
+              </div>
+  
+              <div class="col-start-3 col-end-4">
+                <div class="flex justify-end space-x-2">
+                  <input id="replicability" class="h-10 rounded-lg px-2 w-28 border-2 border-[#00a19a] placeholder:text-sm placeholder:italic" placeholder="Enter score" type="number"/>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-3 mt-5">
+              <div class="col-start-1 col-end-3">
+                <p>13. Special Merit</p>
+  
+                <p class="ml-4 mt-3">Anything else that stands out in a project as worthy of additional points.</p>
+              </div>
+  
+              <div class="col-start-3 col-end-4">
+                <div class="flex justify-end space-x-2">
+                  <input id="special_merit_score" class="h-10 rounded-lg px-2 w-28 border-2 border-[#00a19a] placeholder:text-sm placeholder:italic" placeholder="Enter score" type="number"/>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-5">
+              <label>Comment</label>
+              <br />
+              <textarea id="comment" class="rounded-lg px-2 border-2 border-[#00a19a] h-28 max-h-64 overflow-y-auto min-h-[5rem] w-full"></textarea>
+            </div>
+
+            <div class="mt-10">
+              <button type="button" onclick="submitScore()" class="py-2 px-4 rounded-md hover:shadow-md text-white bg-[#00A19A] hover:bg-[#078e88]">
+                Submit
+              </button>
+            </div>
+          </div>
+
+          <div class="bg-[#00a19a] h-32 mt-20"></div>
+        </div>
+      </div>
+    </div>
+    <script src="/javascripts/pages/score.js"></script>
+  </body>
+</html>

@@ -11,13 +11,14 @@ const session = require('express-session')
 const flash = require('express-flash')
 const methodOverride = require('method-override')
 
-const dashRouter = require('./routes/dash')
+const pagesRouter = require('./routes/pages')
 const authRouter = require('./routes/auth')
+const mediaRouter = require('./routes/media')
 const indexRouter = require('./routes/index')
 const middleware = require('./utils/middleware')
 
 const app = express()
-const DB = require("./database/mongodb")
+const DB = require("./database/config")
 
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
@@ -40,7 +41,8 @@ app.use(passport.session())
 app.use(methodOverride('_method'))
 
 app.use('/', authRouter)
-app.use('/', dashRouter)
+app.use('/', mediaRouter)
+app.use('/', pagesRouter)
 app.use('/', indexRouter)
 
 app.use(middleware.unknownEndpoint)

@@ -1,0 +1,218 @@
+<!Doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('../partials/head.ejs') %>
+    <link rel='stylesheet' href='/stylesheets/style.css' />  
+  </head>
+  <body>
+    <!-- Top nav start -->
+    <div class="shadow-lg px-28 h-16 pt-[0.7rem] sticky top-0 bg-white">
+      <div class="flex justify-end">
+        <input class="placeholder:italic placeholder:text-sm outline-[#00A19A] w-72 py-2 px-4 rounded-l-md  border-2 border-gray-300" placeholder="Search company name..." type="text"/>
+
+        <button class="py-2 px-3 bg-[#00A19A] hover:bg-[#0b8781] text-white transition delay-75 duration-75 ease-linear hover:shadow-sm rounded-r-md">
+          Search
+        </button>
+
+        <form class="h-full" action="/api/auth/logout?_method=DELETE" method="POST">
+          <button class="py-2 px-5 ml-3 bg-[#00A19A] text-white hover:bg-[#0b8781] font-bold transition delay-75 duration-75 ease-linear hover:shadow-sm rounded-md">
+            Logout
+          </button>
+        </form>  
+      </div>
+    </div>
+    <!-- Top nav end -->
+
+    <div class="mx-6 my-10 xl:mx-16">
+      <div class="rounded-md border border-[#C4C4C4] bg-white p-10 mx-auto lg:max-w-[70rem] xl:max-w-[80rem]">
+        <img class="w-36 h-28" src="/assets/images/CSR-A_Logo-RGB.jpeg" alt="" />
+
+        <h1 class="text-[#00A19A] font-bold text-2xl xl:text-3xl mt-8">COMPANY APPLICATION DETAILS</h1>
+
+        <hr class="border-[#C4C4C4] mt-3"/>
+
+        <div class="my-6">
+          <div class="lg:grid lg:grid-cols-2 lg:gap-x-16 gap-y-5">
+            <div>
+              <label>Contact Person</label>
+              <input disabled id="contact_person" class="border h-11 w-full lg:h-10 border-[#00A19A] rounded-md py-1 px-3 placeholder:text-xs bg-white"/>
+            </div>
+
+            <div>
+              <label>Postal Code</label>
+              <input disabled id="postal_code" class="border h-11 w-full lg:h-10 border-[#00A19A] rounded-md py-1 px-3 placeholder:text-xs bg-white"/>
+            </div>
+
+            <div>
+              <label>Organisation name</label>
+              <input disabled id="organisation_name" class="border h-11 w-full lg:h-10 border-[#00A19A] rounded-md py-1 px-3 placeholder:text-xs bg-white"/>
+            </div>
+
+            <div>
+              <label>Email Address</label>
+              <input disabled id="email_address" class="border h-11 w-full lg:h-10 border-[#00A19A] rounded-md py-1 px-3 placeholder:text-xs bg-white"/>
+            </div>
+
+            <div>
+              <label>Organisation Address</label>
+              <input disabled id="organisation_address" class="border h-11 w-full lg:h-10 border-[#00A19A] rounded-md py-1 px-3 placeholder:text-xs bg-white"/>
+            </div>
+
+            <div>
+              <label>Mobile number</label>
+              <input disabled id="mobile_number" class="border h-11 w-full lg:h-10 border-[#00A19A] rounded-md py-1 px-3 placeholder:text-xs bg-white"/>
+            </div>
+
+            <div>
+              <label>Nationality of Organisation</label>
+              <input disabled id="organisation_nationality" class="border h-11 w-full lg:h-10 border-[#00A19A] rounded-md py-1 px-3 placeholder:text-xs bg-white"/>
+            </div>
+
+            <div>
+              <label>Telephone Number</label>
+              <input disabled id="telephone_number" class="border h-11 w-full lg:h-10 border-[#00A19A] rounded-md py-1 px-3 placeholder:text-xs bg-white"/>
+            </div>
+
+            <div>
+              <label>Organisation size</label>
+              <input disabled id="organisation_size" class="border h-11 w-full lg:h-10 border-[#00A19A] rounded-md py-1 px-3 placeholder:text-xs bg-white"/>
+            </div>
+
+            <div>
+              <label>Third sector organisation</label>
+              <input disabled id="organisation_turnover" class="border h-11 w-full lg:h-10 border-[#00A19A] rounded-md py-1 px-3 placeholder:text-xs bg-white"/>
+            </div>
+          </div>
+
+          <div class="mt-8">
+            <label>Introduction</label>
+            <textarea id="introduction" disabled class="overflow-y-auto max-h-[15rem] border h-20 w-full border-[#00A19A] rounded-md p-3 placeholder:text-xs bg-white"></textarea>
+          </div>
+
+          <h1 class="text-[#00A19A] font-bold text-xl mt-5">SECTION ONE - ENVIRONMENT</h1>
+
+          <div class="mt-8">
+            <label>ENVIRONMENT - 1A/ Energy</label>
+            <textarea disabled id="env_energy" class="overflow-y-auto max-h-[15rem] border h-20 w-full border-[#00A19A] rounded-md p-3 placeholder:text-xs bg-white"></textarea>
+          </div>
+
+          <div class="mt-8">
+            <label>ENVIRONMENT - 1B/ Natural Resources</label>
+            <textarea disabled id="env_natural_resource" class="overflow-y-auto max-h-[15rem] border h-20 w-full border-[#00A19A] rounded-md p-3 placeholder:text-xs bg-white"></textarea>
+          </div>
+
+          <div class="mt-8">
+            <label>ENVIRONMENT - 1C/ Travel</label>
+            <textarea disabled id="env_travel" class="overflow-y-auto max-h-[15rem] border h-20 w-full border-[#00A19A] rounded-md p-3 placeholder:text-xs bg-white"></textarea>
+          </div>
+
+          <div class="mt-8">
+            <label>ENVIRONMENT - 1D/ Supply Chain Management</label>
+            <textarea disabled id="env_supply_chain_management" class="overflow-y-auto max-h-[15rem] border h-20 w-full border-[#00A19A] rounded-md p-3 placeholder:text-xs bg-white"></textarea>
+          </div>
+
+          <div class="mt-8">
+            <label>ENVIRONMENT - 1E/ Waste</label>
+            <textarea disabled id="env_waste" class="overflow-y-auto max-h-[15rem] border h-20 w-full border-[#00A19A] rounded-md p-3 placeholder:text-xs bg-white"></textarea>
+          </div>
+
+          <h1 class="text-[#00A19A] font-bold text-xl mt-5">SECTION TWO - WORKPLACE</h1>
+
+          <div class="mt-8">
+            <label>WORKPLACE - 2A/ Training</label>
+            <textarea disabled id="wrk_training" class="overflow-y-auto max-h-[15rem] border h-20 w-full border-[#00A19A] rounded-md p-3 placeholder:text-xs bg-white"></textarea>
+          </div>
+
+          <div class="mt-8">
+            <label>WORKPLACE - 2B/ Labour Practices</label>
+            <textarea disabled id="wrk_labour_practices" class="overflow-y-auto max-h-[15rem] border h-20 w-full border-[#00A19A] rounded-md p-3 placeholder:text-xs bg-white"></textarea>
+          </div>
+
+          <div class="mt-8">
+            <label>WORKPLACE - 2C/Ethical Practices</label>
+            <textarea disabled id="wrk_ethical_practices" class="overflow-y-auto max-h-[15rem] border h-20 w-full border-[#00A19A] rounded-md p-3 placeholder:text-xs bg-white"></textarea>
+          </div>
+
+          <div class="mt-8">
+            <label>WORKPLACE - 2D/ Governance</label>
+            <textarea disabled id="wrk_governance" class="overflow-y-auto max-h-[15rem] border h-20 w-full border-[#00A19A] rounded-md p-3 placeholder:text-xs bg-white"></textarea>
+          </div>
+
+          <div class="mt-8">
+            <label>WORKPLACE - 2E / Policies</label>
+            <textarea disabled id="wrk_policies" class="overflow-y-auto max-h-[15rem] border h-20 w-full border-[#00A19A] rounded-md p-3 placeholder:text-xs bg-white"></textarea>
+          </div>
+
+          <h1 class="text-[#00A19A] font-bold text-xl mt-5">SECTION THREE - COMMUNITY</h1>
+
+          <div class="mt-8">
+            <label>COMMUNITY - 3A/ Engagement</label>
+            <textarea disabled id="com_engagement" class="overflow-y-auto max-h-[15rem] border h-20 w-full border-[#00A19A] rounded-md p-3 placeholder:text-xs bg-white"></textarea>
+          </div>
+
+          <div class="mt-8">
+            <label>COMMUNITY - 3B/ Local Issues</label>
+            <textarea disabled id="com_local_issues" class="overflow-y-auto max-h-[15rem] border h-20 w-full border-[#00A19A] rounded-md p-3 placeholder:text-xs bg-white"></textarea>
+          </div>
+
+          <div class="mt-8">
+            <label>COMMUNITY - 3C/ Wealth Creation</label>
+            <textarea disabled id="com_wealth_creation" class="overflow-y-auto max-h-[15rem] border h-20 w-full border-[#00A19A] rounded-md p-3 placeholder:text-xs bg-white"></textarea>
+          </div>
+
+          <div class="mt-8">
+            <label>COMMUNITY - 3D/ Projects & Groups</label>
+            <textarea disabled id="com_projects_and_groups" class="overflow-y-auto max-h-[15rem] border h-20 w-full border-[#00A19A] rounded-md p-3 placeholder:text-xs bg-white"></textarea>
+          </div>
+
+          <div class="mt-8">
+            <label>COMMUNITY - 3E/ Education</label>
+            <textarea disabled id="com_education" class="overflow-y-auto max-h-[15rem] border h-20 w-full border-[#00A19A] rounded-md p-3 placeholder:text-xs bg-white"></textarea>
+          </div>
+
+          <h1 class="text-[#00A19A] font-bold text-xl mt-5">SECTION FOUR - PHILANTHROPIC</h1>
+
+          <div class="mt-8">
+            <label>PHILANTHROPY - 4A/ Charitable Involvement</label>
+            <textarea disabled id="phil_charitable_involvement" class="overflow-y-auto max-h-[15rem] border h-20 w-full border-[#00A19A] rounded-md p-3 placeholder:text-xs bg-white"></textarea>
+          </div>
+
+          <div class="mt-8">
+            <label>PHILANTHROPY - 4B/ Volunteering</label>
+            <textarea disabled id="phil_volunteering" class="overflow-y-auto max-h-[15rem] border h-20 w-full border-[#00A19A] rounded-md p-3 placeholder:text-xs bg-white"></textarea>
+          </div>
+
+          <div class="mt-8">
+            <label>PHILANTHROPY - 4C/ Pro Bono</label>
+            <textarea disabled id="phil_pro_bono" class="overflow-y-auto max-h-[15rem] border h-20 w-full border-[#00A19A] rounded-md p-3 placeholder:text-xs bg-white"></textarea>
+          </div>
+
+          <div class="mt-8">
+            <label>PHILANTHROPY - 4D/ Fund-raising</label>
+            <textarea disabled id="phil_fund_raising" class="overflow-y-auto max-h-[15rem] border h-20 w-full border-[#00A19A] rounded-md p-3 placeholder:text-xs bg-white"></textarea>
+          </div>
+
+          <div class="mt-8">
+            <label>PHILANTHROPY - 4E/ Financial Gifts/Gifts In Kind</label>
+            <textarea disabled id="phil_financial_and_kind_gifts" class="overflow-y-auto max-h-[15rem] border h-20 w-full border-[#00A19A] rounded-md py-1 px-3 placeholder:text-xs bg-white"></textarea>
+          </div>
+
+          <div class="flex space-x-10">
+            <div class="mt-10">
+              <button onclick="downloadFiles()" class="py-2 px-4 rounded-md hover:shadow-md text-white bg-[#00A19A] hover:bg-[#078e88]">Download all files</button>
+            </div>
+  
+            <div class="mt-10">
+              <button onclick="handleScore()" class="py-2 px-4 rounded-md hover:shadow-md text-white bg-[#00A19A] hover:bg-[#078e88]">
+                Score
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/javascripts/pages/application_details.js"></script>
+  </body>
+</html>

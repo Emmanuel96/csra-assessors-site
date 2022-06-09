@@ -1,7 +1,7 @@
 function login(){
   event.preventDefault()
 
-  let email = document.getElementById('email').value 
+  let email = document.getElementById('email').value
   let password = document.getElementById('password').value
 
   if (!email || !password) {
@@ -17,24 +17,24 @@ function login(){
   }else{
     document.getElementById('login_btn').innerText = "Logging in..."
     document.getElementById('login_btn').disabled = true
-  
-    var data = {email, password}
-  
+
+    var data = { email, password }
+
     fetch('/api/auth/login', {
-      method: "POST", 
+      method: "POST",
       headers: {
         'Content-Type': 'application/json',
         Accept: "application/json",
-      }, 
+      },
       body: JSON.stringify(data)
     }).then(data => (
       data.json()
     )).then(res => {
       if(res){
         document.getElementById('login_btn').innerText = `Welcome ${res.role}`
-  
+
         setTimeout(() => {
-          window.location.href = 'dashboard'
+          window.location.href = 'applications'
         }, 500)
       }
     }).catch(() => {
@@ -42,7 +42,7 @@ function login(){
         title: "Email or Password is incorrect",
         confirmButtonColor: "#00a19a",
       })
-  
+
       document.getElementById('login_btn').innerText = "Login"
       document.getElementById('login_btn').disabled = false
     })

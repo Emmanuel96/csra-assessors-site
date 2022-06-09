@@ -31,9 +31,7 @@ function registerAssessor(){
     document.getElementById('reg_btn').innerText = "Registering..."
     document.getElementById('reg_btn').disabled = true
 
-    var data = {email, password, firstName, lastName}
-
-    console.log(data)
+    var data = { email, password, firstName, lastName }
   
     fetch('/api/auth/register/assessor', {
       method: "POST", 

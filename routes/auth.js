@@ -2,7 +2,6 @@ const express = require("express")
 const Router = express.Router()
 const AuthController = require('../controllers/AuthController')
 const checkNotAuthenticated = require('../passport/checkNotAuthenticated')
-const checkAuthenticated = require('../passport/checkAuthenticated')
 const isAdmin = require('../passport/isAdmin')
 const passport = require('../passport/setup')
 
@@ -14,12 +13,12 @@ Router.delete('/api/auth/logout', (req, res) => {
 
 //POST routes
 Router.post('/api/auth/login',
-  passport.authenticate('local', { 
+  passport.authenticate('local', {
     failureMessage: false,
   }),
   function(req, res) {
     res.json(req.user)
-}); 
+})
 
 Router.post('/api/auth/register/admin', AuthController.post_register_admin)
 

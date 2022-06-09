@@ -17,7 +17,7 @@ function forgotPassword(){
     document.getElementById('send_btn').innerText = "Sending..."
     document.getElementById('send_btn').disabled = true
   
-    var data = {email}
+    var data = { email }
   
     fetch('/api/auth/forgot_password', {
       method: "POST", 

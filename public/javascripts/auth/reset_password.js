@@ -4,7 +4,7 @@ function resetPassword(){
   let password = document.getElementById('password').value
   let confirm_password = document.getElementById('confirm_password').value
 
-  let data = {password, confirm_password}
+  let data = { password, confirm_password }
   let token = window.location.href.split('/').pop()
 
   if (!password || !confirm_password) {
