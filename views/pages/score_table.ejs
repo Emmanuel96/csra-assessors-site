@@ -1,0 +1,22 @@
+<!Doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('../partials/head.ejs') %>
+    <link rel='stylesheet' href='/stylesheets/style.css' />  
+  </head>
+  <body>
+    <!-- Top nav start -->
+    <div class="shadow-lg px-28 h-16 pt-[0.7rem] sticky top-0 bg-white">
+      <div class="flex justify-end">
+        <form class="h-full" action="/api/auth/logout?_method=DELETE" method="POST">
+          <button class="py-[0.5rem] px-5 ml-3 bg-[#00A19A] text-white hover:bg-[#0b8781] font-bold transition delay-75 duration-75 ease-linear hover:shadow-sm rounded-md">
+            Logout
+          </button>
+        </form>  
+      </div>
+    </div>
+    <!-- Top nav end -->
+  </body>
+</html>

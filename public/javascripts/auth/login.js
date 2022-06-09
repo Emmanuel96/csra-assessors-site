@@ -33,9 +33,15 @@ function login(){
       if(res){
         document.getElementById('login_btn').innerText = `Welcome ${res.role}`
 
-        setTimeout(() => {
-          window.location.href = 'applications'
-        }, 500)
+        if(res.role === 'admin'){
+          setTimeout(() => {
+            window.location.href = 'score_table'
+          }, 500)
+        }else if(res.role === 'assessor'){
+          setTimeout(() => {
+            window.location.href = 'applications'
+          }, 500)
+        }
       }
     }).catch(() => {
       Swal.fire({
