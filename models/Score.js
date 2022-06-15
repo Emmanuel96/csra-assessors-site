@@ -1,7 +1,12 @@
 const mongoose = require('mongoose');
 
 const ScoreSchema = new mongoose.Schema({
-  application: {
+  applicationID: {
+    type: String,
+    ref: 'Application'
+  },
+
+  assessorID: {
     type: String,
     ref: 'Application'
   },

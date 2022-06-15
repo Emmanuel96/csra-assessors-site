@@ -1,36 +1,37 @@
 let applicationID = window.location.pathname.split('/').pop()
 
-axios.get(`/api/application_score/${applicationID}`).then(score => {
-  document.getElementById('csr_benefit_score').value = score.data.csr_benefit_score
+// axios.get(`/api/application_score/${applicationID}`).then(score => {
+//   document.getElementById('csr_benefit_score').value = score.data.csr_benefit_score
 
-  document.getElementById('env_benefit_score').value = score.data.environmental_benefit_score
+//   document.getElementById('env_benefit_score').value = score.data.environmental_benefit_score
 
-  document.getElementById('social_benefit_score').value = score.data.social_benefit_score
+//   document.getElementById('social_benefit_score').value = score.data.social_benefit_score
 
-  document.getElementById('staff_benefit_score').value = score.data.staff_benefit_score
+//   document.getElementById('staff_benefit_score').value = score.data.staff_benefit_score
 
-  document.getElementById('wrk_benefit_score').value = score.data.workplace_benefit_score
+//   document.getElementById('wrk_benefit_score').value = score.data.workplace_benefit_score
 
-  document.getElementById('charitable_benefit_score').value = score.data.charitable_benefit_score
+//   document.getElementById('charitable_benefit_score').value = score.data.charitable_benefit_score
 
-  document.getElementById('financial_benefit_score').value = score.data.financial_benefit_score
+//   document.getElementById('financial_benefit_score').value = score.data.financial_benefit_score
 
-  document.getElementById('commitment_score').value = score.data.commitment_score
+//   document.getElementById('commitment_score').value = score.data.commitment_score
 
-  document.getElementById('evidence_score').value = score.data.evidence_score
+//   document.getElementById('evidence_score').value = score.data.evidence_score
 
-  document.getElementById('degree_of_originality_score').value = score.data.degree_of_originality_score
+//   document.getElementById('degree_of_originality_score').value = score.data.degree_of_originality_score
 
-  document.getElementById('future_expansion_score').value = score.data.future_expansion_score
+//   document.getElementById('future_expansion_score').value = score.data.future_expansion_score
 
-  document.getElementById('replicability').value = score.data.replicability_score
+//   document.getElementById('replicability').value = score.data.replicability_score
 
-  document.getElementById('special_merit_score').value = score.data.special_merit_score
+//   document.getElementById('special_merit_score').value = score.data.special_merit_score
 
-  document.getElementById('comment').value = score.data.comment
-})
+//   document.getElementById('comment').value = score.data.comment
+// })
 
 function submitScore() {
+  console.log('clicked')
   let csr_benefit_score = document.getElementById('csr_benefit_score').value
   let env_benefit_score = document.getElementById('env_benefit_score').value
   let social_benefit_score = document.getElementById('social_benefit_score').value
@@ -79,15 +80,16 @@ function submitScore() {
       comment: comment
     }
 
-    axios.put(`/api/score/application/${applicationID}`, data).then(res => {
+    axios.post(`/api/score/application/${applicationID}`, data).then(res => {
       console.log(res.data)
       Swal.fire({
         title: "Sucessfully Scored Application",
         confirmButtonColor: "#00a19a",
       });
-    }).catch(() => {
+    }).catch((error) => {
+      console.log(error)
       Swal.fire({
-        title: "Failed to score application",
+        title: error.response.data.message,
         confirmButtonColor: "#00a19a",
       });
     })
