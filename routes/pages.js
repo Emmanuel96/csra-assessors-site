@@ -11,6 +11,9 @@ Router.get('/api/applications/:id', PagesController.get_application_data)
 
 Router.get('/api/application_score/:id', PagesController.get_application_score)
 
+// UPDATE routes
+Router.put('/api/update_score/application/:id', PagesController.update_application_score)
+
 // POST route
 Router.post('/api/score/application/:id', PagesController.score_application)
 

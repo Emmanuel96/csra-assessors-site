@@ -1,37 +1,40 @@
 let applicationID = window.location.pathname.split('/').pop()
 
-// axios.get(`/api/application_score/${applicationID}`).then(score => {
-//   document.getElementById('csr_benefit_score').value = score.data.csr_benefit_score
+axios.get(`/api/application_score/${applicationID}`).then(score => {
+  if(score){
+    document.getElementById('csr_benefit_score').value = score.data.csr_benefit_score
 
-//   document.getElementById('env_benefit_score').value = score.data.environmental_benefit_score
-
-//   document.getElementById('social_benefit_score').value = score.data.social_benefit_score
-
-//   document.getElementById('staff_benefit_score').value = score.data.staff_benefit_score
-
-//   document.getElementById('wrk_benefit_score').value = score.data.workplace_benefit_score
-
-//   document.getElementById('charitable_benefit_score').value = score.data.charitable_benefit_score
-
-//   document.getElementById('financial_benefit_score').value = score.data.financial_benefit_score
-
-//   document.getElementById('commitment_score').value = score.data.commitment_score
-
-//   document.getElementById('evidence_score').value = score.data.evidence_score
-
-//   document.getElementById('degree_of_originality_score').value = score.data.degree_of_originality_score
-
-//   document.getElementById('future_expansion_score').value = score.data.future_expansion_score
-
-//   document.getElementById('replicability').value = score.data.replicability_score
-
-//   document.getElementById('special_merit_score').value = score.data.special_merit_score
-
-//   document.getElementById('comment').value = score.data.comment
-// })
+    document.getElementById('env_benefit_score').value = score.data.environmental_benefit_score
+  
+    document.getElementById('social_benefit_score').value = score.data.social_benefit_score
+  
+    document.getElementById('staff_benefit_score').value = score.data.staff_benefit_score
+  
+    document.getElementById('wrk_benefit_score').value = score.data.workplace_benefit_score
+  
+    document.getElementById('charitable_benefit_score').value = score.data.charitable_benefit_score
+  
+    document.getElementById('financial_benefit_score').value = score.data.financial_benefit_score
+  
+    document.getElementById('commitment_score').value = score.data.commitment_score
+  
+    document.getElementById('evidence_score').value = score.data.evidence_score
+  
+    document.getElementById('degree_of_originality_score').value = score.data.degree_of_originality_score
+  
+    document.getElementById('future_expansion_score').value = score.data.future_expansion_score
+  
+    document.getElementById('replicability').value = score.data.replicability_score
+  
+    document.getElementById('special_merit_score').value = score.data.special_merit_score
+  
+    document.getElementById('comment').value = score.data.comment
+  }else{
+    return null
+  }
+})
 
 function submitScore() {
-  console.log('clicked')
   let csr_benefit_score = document.getElementById('csr_benefit_score').value
   let env_benefit_score = document.getElementById('env_benefit_score').value
   let social_benefit_score = document.getElementById('social_benefit_score').value
@@ -87,11 +90,52 @@ function submitScore() {
         confirmButtonColor: "#00a19a",
       });
     }).catch((error) => {
-      console.log(error)
-      Swal.fire({
-        title: error.response.data.message,
-        confirmButtonColor: "#00a19a",
-      });
+      if(error.response.data.message === "You have already scored this application before"){
+        Swal.fire({
+          title: 'You have already scored this application before. Do you want to update score?',
+          showDenyButton: true,
+          showCancelButton: true,
+          confirmButtonText: 'Yes',
+          denyButtonText: 'No',
+          customClass: {
+            actions: 'my-actions',
+            cancelButton: 'order-1 right-gap',
+            confirmButton: 'order-2',
+            denyButton: 'order-3',
+          }
+        }).then((result) => {
+          if (result.isConfirmed) {
+            let data = {
+              csr_benefit_score : csr_benefit_score,
+              environmental_benefit_score: env_benefit_score,
+              social_benefit_score: social_benefit_score,
+              staff_benefit_score: staff_benefit_score,
+              workplace_benefit_score: wrk_benefit_score,
+              charitable_benefit_score: charitable_benefit_score,
+              financial_benefit_score: financial_benefit_score,
+              commitment_score: commitment_score,
+              evidence_score: evidence_score,
+              degree_of_originality_score: degree_of_originality_score,
+              future_expansion_score: future_expansion_score,
+              replicability_score: replicability,
+              special_merit_score: special_merit_score,
+              comment: comment
+            }
+            axios.put(`/api/update_score/application/${applicationID}`, data).then(() => {
+              Swal.fire('Score was updated successfully', '', 'success')
+            }).catch(() => {
+              Swal.fire('Failed to update score', '', 'info')
+            })
+          } else if (result.isDenied) {
+            Swal.fire('Got it! Score was not updated', '', 'info')
+          }
+        })
+      }else if (error.response.data.message === "This application has been scored by 3 assesors already. Proceed to the next application"){
+        Swal.fire({
+          title: "This application has been scored by 3 assesors already. Proceed to the next application",
+          confirmButtonColor: "#00a19a",
+        });
+      }
     })
   }
 }

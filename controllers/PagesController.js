@@ -24,17 +24,66 @@ exports.get_application_data = (req, res, next) => {
 
 exports.get_application_score = (req, res, next) => {
   let applicationID = req.params.id
-  Score.findOne({ application: applicationID }).then(data => {
-    res.status(200).json(data)
+  Score.findOne({ application: applicationID, assessorID: req.user._id.toString() }).then(data => {
+    if(data){
+      return res.status(200).json(data)
+    }
+    res.status(400).json({
+      success: false,
+      message: "Application has no previous score"
+    })
   }).catch(error => {
    logger.error(error)
     res.status(404).end()
   })
 }
 
-// exports.get_all_scores = (req, res, next) => {
-
-// }
+// UPDATE controllers
+exports.update_application_score = (req, res, next) => {
+  let applicationID = req.params.id
+  const {
+    csr_benefit_score,
+    environmental_benefit_score,
+    social_benefit_score,
+    staff_benefit_score,
+    workplace_benefit_score,
+    charitable_benefit_score,
+    financial_benefit_score,
+    commitment_score,
+    evidence_score,
+    degree_of_originality_score,
+    future_expansion_score,
+    replicability_score,
+    special_merit_score,
+    comment
+  } = req.body
+  Score.findOneAndUpdate(
+    { application: applicationID, assessorID: req.user._id.toString() },
+    {
+      csr_benefit_score,
+      environmental_benefit_score,
+      social_benefit_score,
+      staff_benefit_score,
+      workplace_benefit_score,
+      charitable_benefit_score,
+      financial_benefit_score,
+      commitment_score,
+      evidence_score,
+      degree_of_originality_score,
+      future_expansion_score,
+      replicability_score,
+      special_merit_score,
+      comment
+    },
+    { new: true, runValidators: true, context: 'query' }
+  ).then(() => {
+    logger.info("Score is updated!")
+    res.status(200).end()
+  }).catch(error => {
+    logger.error("Failed to update score", error)
+    res.status(400).end()
+  })
+}
 
 // POST controllers
 exports.score_application = (req, res, next) => {
