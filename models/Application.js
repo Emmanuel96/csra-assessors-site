@@ -194,7 +194,9 @@ const ApplicationSchema = new mongoose.Schema({
 
   assessments_and_tips_completed: Boolean,
 
-  finished: Boolean
+  finished: Boolean,
+
+  scoredByAssessors: Boolean
 });
 
 ApplicationSchema.set('toJSON', {

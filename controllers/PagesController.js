@@ -4,7 +4,7 @@ const logger = require('../utils/logger')
 
 // GET controllers
 exports.get_completed_applications = (req, res, next) => {
-  Application.find({ finished: true }).then(data => {
+  Application.find({ finished: true, scoredByAssessors: false }).then(data => {
     res.status(200).json(data)
   }).catch(error => {
    logger.error(error)
@@ -126,6 +126,22 @@ exports.score_application = (req, res, next) => {
         }
       })
     }
+  }).then(() => {
+    // checks if application is scored by 3 assesors and updates 'scoredByAssessors' to true
+    Score.find({ applicationID: req.params.id }).then(scores => {
+      let ID = req.params.id
+      if(scores.length === 3){
+        Application.findByIdAndUpdate(
+          ID, 
+          { scoredByAssessors: true },
+          { new: true, runValidators: true, context: 'query' }
+        ).then(() => {
+          logger.info("Jackpot, application has been scored by 3 assessors")
+        })
+      }else{
+        logger.info("Only", scores.length, " have scored this application")
+      }
+    })
   })
 }
 
