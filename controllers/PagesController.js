@@ -12,6 +12,15 @@ exports.get_completed_applications = (req, res, next) => {
   })
 }
 
+exports.get_assessed_applications = (req, res, next) => {
+  Application.find({ scoredByAssessors: true }).then(data => {
+    res.status(200).json(data)
+  }).catch(error => {
+   logger.error(error)
+    res.status(404).end()
+  })
+}
+
 exports.get_application_data = (req, res, next) => {
   let ID = req.params.id
   Application.findById(ID).then(data => {
@@ -24,7 +33,8 @@ exports.get_application_data = (req, res, next) => {
 
 exports.get_application_score = (req, res, next) => {
   let applicationID = req.params.id
-  Score.findOne({ application: applicationID, assessorID: req.user._id.toString() }).then(data => {
+
+  Score.findOne({ applicationID: applicationID, assessorID: req.user._id.toString() }).then(data => {
     if(data){
       return res.status(200).json(data)
     }
@@ -34,6 +44,15 @@ exports.get_application_score = (req, res, next) => {
     })
   }).catch(error => {
    logger.error(error)
+    res.status(404).end()
+  })
+}
+
+exports.get_all_application_scores = (req, res) => {
+  let applicationID = req.params.id
+  Score.find({ applicationID: applicationID }).then(scores => {
+    res.status(200).json(scores)
+  }).catch(error => {
     res.status(404).end()
   })
 }
@@ -100,6 +119,7 @@ exports.score_application = (req, res, next) => {
           const newScore = new Score({
             applicationID: req.params.id,
             assessorID: req.user._id.toString(),
+            date_assessed: req.body.date_assessed,
             csr_benefit_score: req.body.csr_benefit_score,
             environmental_benefit_score: req.body.environmental_benefit_score,
             social_benefit_score: req.body.social_benefit_score,
@@ -113,6 +133,7 @@ exports.score_application = (req, res, next) => {
             future_expansion_score: req.body.future_expansion_score,
             replicability_score: req.body.replicability_score,
             special_merit_score: req.body.special_merit_score,
+            total_score: req.body.total_score,
             comment: req.body.comment
           })
         
@@ -158,6 +179,10 @@ exports.score_application_page = (req, res, next) => {
   res.render('pages/score')
 }
 
-exports.score_table_page = (req, res, next) => {
-  res.render('pages/score_table')
+exports.assessed_applications_page = (req, res, next) => {
+  res.render('pages/assessed_applications')
+}
+
+exports.get_application_score_details = (req, res) => {
+  res.render('pages/application_score_details')
 }

@@ -23,15 +23,21 @@
       <div class="mx-auto max-w-[75rem]">
         <div class="rounded-md pt-10 border border-[#bdbcbc]">
           <div class="flex justify-between pt-10 px-10">
-            <h1 class="text-3xl text-[#00a19a]">CSR Accreditation</h1>
+            <h1 class="text-3xl text-[#00a19a]">CSR Accreditation Score Sheet</h1>
   
-            <img class="md:w-40 md:h-auto h-20 w-20" src="../images/CSR-A_Logo-RGB.jpeg" alt="" />
+            <p class="text-2xl text-[#363636]">Assessment Date: <span id="date"></span></p>
+          </div>
+
+          <div class="mt-10 px-10 text-red-700">
+            <p>Score up to 10 points for each section. Remember that scores from 6 to 10 are positive. A score of 5 is neutral. Scores of 1 to 4 are negative</p>
+
+            <p>All scores from the bonus column (column 13) are positive.</p>
           </div>
   
-          <div class="text-lg mt-16  px-10">
+          <div class="text-lg mt-10  px-10">
             <div class="grid grid-cols-3 mt-5">
               <div class="col-start-1 col-end-3">
-                <p>1. CSR Benefit</p>
+                <p>1. Clear CSR Impact</p>
   
                 <p class="ml-4 mt-3">Does the policy identify clear CSR benefit?</p>
               </div>
@@ -129,7 +135,7 @@
 
             <div class="grid grid-cols-3 mt-5">
               <div class="col-start-1 col-end-3">
-                <p>8.  Commitment of the entrants/ Involvement of relevant stakeholders and employee</p>
+                <p>8.  Commitment of the entrants</p>
   
                 <p class="ml-4 mt-3">Have staff demonstrated their commitment?</p>
               </div>
@@ -143,8 +149,8 @@
 
             <div class="grid grid-cols-3 mt-5">
               <div class="col-start-1 col-end-3">
-                <p>9.  Evidence of measurable impact/benefits (environmental, social and financial)</p>
-                </div>
+                <p>9.  Evidence of measurable impact</p>
+              </div>
   
               <div class="col-start-3 col-end-4">
                 <div class="flex justify-end space-x-2">
@@ -169,7 +175,7 @@
 
             <div class="grid grid-cols-3 mt-5">
               <div class="col-start-1 col-end-3">
-                <p>11. Future expansion of the scheme How do they intend to move forward?</p>
+                <p>11. Future expansion</p>
                 </div>
   
               <div class="col-start-3 col-end-4">
@@ -206,6 +212,8 @@
                 </div>
               </div>
             </div>
+
+            <p class="text-[#363636] text-lg mt-4">Total Score: <span id="total_score"></span></p>
 
             <div class="mt-5">
               <label>Comment</label>

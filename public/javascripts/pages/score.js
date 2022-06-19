@@ -2,6 +2,8 @@ let applicationID = window.location.pathname.split('/').pop()
 
 axios.get(`/api/application_score/${applicationID}`).then(score => {
   if(score){
+    document.getElementById('date').innerHTML = score.data.date_assessed
+
     document.getElementById('csr_benefit_score').value = score.data.csr_benefit_score
 
     document.getElementById('env_benefit_score').value = score.data.environmental_benefit_score
@@ -28,9 +30,9 @@ axios.get(`/api/application_score/${applicationID}`).then(score => {
   
     document.getElementById('special_merit_score').value = score.data.special_merit_score
   
+    document.getElementById('total_score').value = score.data.total_score
+
     document.getElementById('comment').value = score.data.comment
-  }else{
-    return null
   }
 })
 
@@ -49,6 +51,14 @@ function submitScore() {
   let replicability = document.getElementById('replicability').value
   let special_merit_score = document.getElementById('special_merit_score').value
   let comment = document.getElementById('comment').value
+
+  let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
+  let today  = new Date()
+  let date_assessed = today.toLocaleDateString("en-US", options)
+
+  let total = csr_benefit_score + env_benefit_score + social_benefit_score + staff_benefit_score + wrk_benefit_score + charitable_benefit_score + financial_benefit_score + commitment_score + evidence_score + degree_of_originality_score + future_expansion_score + replicability + special_merit_score
+
+  console.log(total)
 
   if(!csr_benefit_score || !env_benefit_score || !social_benefit_score || !staff_benefit_score || !wrk_benefit_score || !charitable_benefit_score || !financial_benefit_score || !commitment_score || !evidence_score || !degree_of_originality_score || !future_expansion_score || !replicability || !special_merit_score){
     Swal.fire({
@@ -80,7 +90,9 @@ function submitScore() {
       future_expansion_score: future_expansion_score,
       replicability_score: replicability,
       special_merit_score: special_merit_score,
-      comment: comment
+      comment: comment,
+      date_assessed: date_assessed,
+      total_score: total
     }
 
     axios.post(`/api/score/application/${applicationID}`, data).then(res => {

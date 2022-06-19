@@ -11,6 +11,10 @@ const ScoreSchema = new mongoose.Schema({
     ref: 'Application'
   },
 
+  date_assessed: {
+    type: String
+  },
+
   csr_benefit_score: {
     type: Number
   },
@@ -60,6 +64,10 @@ const ScoreSchema = new mongoose.Schema({
   },
 
   special_merit_score: {
+    type: Number
+  },
+
+  total_score: {
     type: Number
   },
 

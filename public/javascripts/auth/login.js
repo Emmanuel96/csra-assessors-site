@@ -35,7 +35,7 @@ function login(){
 
         if(res.role === 'admin'){
           setTimeout(() => {
-            window.location.href = 'score_table'
+            window.location.href = 'assessed_applications'
           }, 500)
         }else if(res.role === 'assessor'){
           setTimeout(() => {

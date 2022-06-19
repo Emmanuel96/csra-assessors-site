@@ -1,0 +1,362 @@
+<!Doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('../partials/head.ejs') %>
+    <link rel='stylesheet' href='/stylesheets/style.css' />  
+  </head>
+  <body>
+    <!-- Top nav start -->
+    <div class="shadow-lg px-28 h-16 pt-[0.7rem] sticky top-0 bg-white">
+      <div class="flex justify-end">
+        <form class="h-full" action="/api/auth/logout?_method=DELETE" method="POST">
+          <button class="py-[0.5rem] px-5 ml-3 bg-[#00A19A] text-white hover:bg-[#0b8781] font-bold transition delay-75 duration-75 ease-linear hover:shadow-sm rounded-md">
+            Logout
+          </button>
+        </form>  
+      </div>
+    </div>
+    <!-- Top nav end -->
+    
+    <div class="mx-auto w-full px-10 mt-14">
+      <div class="mx-auto max-w-[85rem]">
+        <h1 class="text-2xl font-bold text-[#585856]">Organisation name: <span id="organisation_name"></span></h1>
+        <div class="shadow-sm border-2 rounded-md py-10 px-6 mb-20 mt-2">
+          <div class="md:grid md:grid-cols-2 xl:grid-cols-3 md:gap-8">
+            <div>
+              <h1 class="text-xl text-[#00A19A]">1st Assessor's Assessment</h1>
+
+              <hr class="border-[#545353] mt-2 "/> 
+
+              <div class="flex justify-between px-6 mt-3 font-semibold text-[#545353] text-lg">
+                <p>Section</p>
+  
+                <p>Score</p>
+              </div>
+
+              <div class="border-2 mt-2 p-6 space-y-4 rounded-md">
+                <div class="flex justify-between">
+                  <p>Clear CSR Impact</p>
+    
+                  <p id="csr_benefit_score_1"></p>
+                </div>
+  
+                <div class="flex justify-between">
+                  <p>Environmental Benefits</p>
+    
+                  <p id="environmental_benefit_score_1"></p>
+                </div>
+  
+                <div class="flex justify-between">
+                  <p>Social Benefit</p>
+    
+                  <p id="social_benefit_score_1"></p>
+                </div>
+  
+                <div class="flex justify-between">
+                  <p>Staff Benefit</p>
+    
+                  <p id="staff_benefit_score_1"></p>
+                </div>
+  
+                <div class="flex justify-between">
+                  <p>Workplace Benefit</p>
+    
+                  <p id="workplace_benefit_score_1"></p>
+                </div>
+  
+                <div class="flex justify-between">
+                  <p>Charitable Benefit</p>
+    
+                  <p id="charitable_benefit_score_1"></p>
+                </div>
+  
+                <div class="flex justify-between">
+                  <p>Financial Benefit</p>
+    
+                  <p id="financial_benefit_score_1"></p>
+                </div>
+  
+                <div class="flex justify-between">
+                  <p>Commitment of the entrants</p>
+    
+                  <p id="commitment_score_1"></p>
+                </div>
+  
+                <div class="flex justify-between">
+                  <p>Evidence of measurable impact</p>
+    
+                  <p id="evidence_score_1"></p>
+                </div>
+  
+                <div class="flex justify-between">
+                  <p>Degree of originality/innovation</p>
+    
+                  <p id="degree_of_originality_score_1"></p>
+                </div>
+  
+                <div class="flex justify-between">
+                  <p>Future expansion</p>
+    
+                  <p id="future_expansion_score_1"></p>
+                </div>
+  
+                <div class="flex justify-between">
+                  <p>Replicability</p>
+    
+                  <p id="replicability_score_1"></p>
+                </div>
+  
+                <div class="flex justify-between">
+                  <p>Special Merit</p>
+    
+                  <p id="special_merit_score_1"></p>
+                </div>
+
+                <div class="flex justify-between text-lg border-y py-2 border-[#545353]">
+                  <p>Total Score</p>
+    
+                  <p id="total_score_1"></p>
+                </div>
+
+                <div class="flex justify-between text-lg border-b pb-2 border-[#545353]">
+                  <p class="text-gray-900 font-bold">Date Assessed</p>
+    
+                  <p id="date_assessed_1" class="text-gray-700 font-bold"></p>
+                </div>
+              </div>
+
+              <div class="mt-3">
+                <label>Comment</label>
+                <br>
+                <textarea id="comment_1" disabled class="border-[#545353] h-32 py-7 px-4 overflow-y-auto max-h-52 rounded-md w-full border"></textarea>
+              </div>
+            </div>
+
+            <div>
+              <h1 class="text-xl text-[#00A19A]">2nd Assessor's Assessment</h1>
+
+              <hr class="border-[#545353] mt-2 "/> 
+
+              <div class="flex justify-between px-6 mt-3 font-semibold text-[#545353] text-lg">
+                <p>Section</p>
+  
+                <p>Score</p>
+              </div>
+
+              <div class="border-2 mt-2 p-6 space-y-4 rounded-md">
+                <div class="flex justify-between">
+                  <p>Clear CSR Impact</p>
+    
+                  <p id="csr_benefit_score_2"></p>
+                </div>
+  
+                <div class="flex justify-between">
+                  <p>Environmental Benefits</p>
+    
+                  <p id="environmental_benefit_score_2"></p>
+                </div>
+  
+                <div class="flex justify-between">
+                  <p>Social Benefit</p>
+    
+                  <p id="social_benefit_score_2"></p>
+                </div>
+  
+                <div class="flex justify-between">
+                  <p>Staff Benefit</p>
+    
+                  <p id="staff_benefit_score_2"></p>
+                </div>
+  
+                <div class="flex justify-between">
+                  <p>Workplace Benefit</p>
+    
+                  <p id="workplace_benefit_score_2"></p>
+                </div>
+  
+                <div class="flex justify-between">
+                  <p>Charitable Benefit</p>
+    
+                  <p id="charitable_benefit_score_2"></p>
+                </div>
+  
+                <div class="flex justify-between">
+                  <p>Financial Benefit</p>
+    
+                  <p id="financial_benefit_score_2"></p>
+                </div>
+  
+                <div class="flex justify-between">
+                  <p>Commitment of the entrants</p>
+    
+                  <p id="commitment_score_2"></p>
+                </div>
+  
+                <div class="flex justify-between">
+                  <p>Evidence of measurable impact</p>
+    
+                  <p id="evidence_score_2"></p>
+                </div>
+  
+                <div class="flex justify-between">
+                  <p>Degree of originality/innovation</p>
+    
+                  <p id="degree_of_originality_score_2"></p>
+                </div>
+  
+                <div class="flex justify-between">
+                  <p>Future expansion</p>
+    
+                  <p id="future_expansion_score_2"></p>
+                </div>
+  
+                <div class="flex justify-between">
+                  <p>Replicability</p>
+    
+                  <p id="replicability_score_2"></p>
+                </div>
+  
+                <div class="flex justify-between">
+                  <p>Special Merit</p>
+    
+                  <p id="special_merit_score_2"></p>
+                </div>
+
+                <div class="flex justify-between text-lg border-y py-2 border-[#545353]">
+                  <p>Total Score</p>
+    
+                  <p id="total_score_2"></p>
+                </div>
+
+                <div class="flex justify-between text-lg border-b pb-2 border-[#545353]">
+                  <p class="text-gray-900 font-bold">Date Assessed</p>
+    
+                  <p id="date_assessed_2" class="text-gray-700 font-bold"></p>
+                </div>
+              </div>
+
+              <div class="mt-3">
+                <label>Comment</label>
+                <br>
+                <textarea id="comment_2" disabled class="border-[#545353] h-32 py-7 px-4 overflow-y-auto max-h-52 rounded-md w-full border"></textarea>
+              </div>
+            </div>
+
+            <div>
+              <h1 class="text-xl text-[#00A19A]">3rd Assessor's Assessment</h1>
+
+              <hr class="border-[#545353] mt-2 "/> 
+
+              <div class="flex justify-between px-6 mt-3 font-semibold text-[#545353] text-lg">
+                <p>Section</p>
+  
+                <p>Score</p>
+              </div>
+
+              <div class="border-2 mt-2 p-6 space-y-4 rounded-md">
+                <div class="flex justify-between">
+                  <p>Clear CSR Impact</p>
+    
+                  <p id="csr_benefit_score_3"></p>
+                </div>
+  
+                <div class="flex justify-between">
+                  <p>Environmental Benefits</p>
+    
+                  <p id="environmental_benefit_score_3"></p>
+                </div>
+  
+                <div class="flex justify-between">
+                  <p>Social Benefit</p>
+    
+                  <p id="social_benefit_score_3"></p>
+                </div>
+  
+                <div class="flex justify-between">
+                  <p>Staff Benefit</p>
+    
+                  <p id="staff_benefit_score_3"></p>
+                </div>
+  
+                <div class="flex justify-between">
+                  <p>Workplace Benefit</p>
+    
+                  <p id="workplace_benefit_score_3"></p>
+                </div>
+  
+                <div class="flex justify-between">
+                  <p>Charitable Benefit</p>
+    
+                  <p id="charitable_benefit_score_3"></p>
+                </div>
+  
+                <div class="flex justify-between">
+                  <p>Financial Benefit</p>
+    
+                  <p id="financial_benefit_score_3"></p>
+                </div>
+  
+                <div class="flex justify-between">
+                  <p>Commitment of the entrants</p>
+    
+                  <p id="commitment_score_3"></p>
+                </div>
+  
+                <div class="flex justify-between">
+                  <p>Evidence of measurable impact</p>
+    
+                  <p id="evidence_score_3"></p>
+                </div>
+  
+                <div class="flex justify-between">
+                  <p>Degree of originality/innovation</p>
+    
+                  <p id="degree_of_originality_score_3"></p>
+                </div>
+  
+                <div class="flex justify-between">
+                  <p>Future expansion</p>
+    
+                  <p id="future_expansion_score_3"></p>
+                </div>
+  
+                <div class="flex justify-between">
+                  <p>Replicability</p>
+    
+                  <p id="replicability_score_3"></p>
+                </div>
+  
+                <div class="flex justify-between">
+                  <p>Special Merit</p>
+    
+                  <p id="special_merit_score_3"></p>
+                </div>
+
+                <div class="flex justify-between text-lg border-y py-2 border-[#545353]">
+                  <p>Total Score</p>
+    
+                  <p id="total_score_3"></p>
+                </div>
+
+                <div class="flex justify-between text-lg border-b pb-2 border-[#545353]">
+                  <p class="text-gray-900 font-bold">Date Assessed</p>
+    
+                  <p id="date_assessed_3" class="text-gray-700 font-bold"></p>
+                </div>
+              </div>
+
+              <div class="mt-3">
+                <label>Comment</label>
+                <br>
+                <textarea id="comment_3" disabled class="border-[#545353] h-32 py-7 px-4 overflow-y-auto max-h-52 rounded-md w-full border"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/javascripts/pages/application_score_details.js"></script>
+  </body>
+</html>
