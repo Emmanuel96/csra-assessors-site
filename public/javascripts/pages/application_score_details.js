@@ -102,4 +102,52 @@ axios.get(`/api/all_application_scores/${applicationID}`).then((res) => {
   document.getElementById('date_assessed_3').innerHTML = scores[2].date_assessed
 
   document.getElementById('comment_3').value = scores[2].comment
+
+  // let average_1 = (scores[0].total_score / 13)
+
+  // let average_2 = (scores[1].total_score / 13)
+
+  // let average_3 = (scores[2].total_score / 13)
+
+  let average_1 = (scores[0].total_score / (120*3) * 100)
+
+  let average_2 = (scores[1].total_score / (120*3) * 100)
+
+  let average_3 = (scores[2].total_score / (120*3) * 100)
+
+  document.getElementById('average_1').innerHTML = average_1.toFixed(2)
+
+  document.getElementById('average_2').innerHTML = average_2.toFixed(2)
+
+  document.getElementById('average_3').innerHTML = average_3.toFixed(2)    
+
+  if(scores[0].total_score < 65){
+    document.getElementById('award_1').innerHTML = "No Award"
+  } else if(scores[0].total_score >= 65 && scores[0].total_score <= 83){
+    document.getElementById('award_1').innerHTML = "Bronze"
+  } else if(scores[0].total_score >= 84 && scores[0].total_score <= 103){
+    document.getElementById('award_1').innerHTML = "Silver"
+  } else if(scores[0].total_score >= 104 && scores[0].total_score <= 130){
+    document.getElementById('award_1').innerHTML = "Gold"
+  }
+
+  if(scores[1].total_score < 65){
+    document.getElementById('award_2').innerHTML = "No Award"
+  } else if(scores[1].total_score >= 65 && scores[1].total_score <= 83){
+    document.getElementById('award_2').innerHTML = "Bronze"
+  } else if(scores[1].total_score >= 84 && scores[1].total_score <= 103){
+    document.getElementById('award_2').innerHTML = "Silver"
+  } else if(scores[1].total_score >= 104 && scores[1].total_score <= 130){
+    document.getElementById('award_2').innerHTML = "Gold"
+  }
+
+  if(scores[2].total_score < 65){
+    document.getElementById('award_3').innerHTML = "No Award"
+  } else if(scores[2].total_score >= 65 && scores[2].total_score <= 83){
+    document.getElementById('award_3').innerHTML = "Bronze"
+  } else if(scores[2].total_score >= 84 && scores[2].total_score <= 103){
+    document.getElementById('award_3').innerHTML = "Silver"
+  } else if(scores[2].total_score >= 104 && scores[2].total_score <= 130){
+    document.getElementById('award_3').innerHTML = "Gold"
+  }
 })

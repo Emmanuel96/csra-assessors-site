@@ -192,6 +192,14 @@ const ApplicationSchema = new mongoose.Schema({
 
   phil_financial_and_kind_gifts_completed: Boolean,
 
+  phil_other_information: {
+    typer: String
+  },
+
+  phil_future_planning: {
+    typer: String
+  },
+
   assessments_and_tips_completed: Boolean,
 
   finished: Boolean,

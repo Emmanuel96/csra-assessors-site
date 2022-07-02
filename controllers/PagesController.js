@@ -74,8 +74,13 @@ exports.update_application_score = (req, res, next) => {
     future_expansion_score,
     replicability_score,
     special_merit_score,
-    comment
+    comment,
+    date_assessed,
+    total_score
   } = req.body
+
+  console.log(req.body.total_score)
+  
   Score.findOneAndUpdate(
     { application: applicationID, assessorID: req.user._id.toString() },
     {
@@ -92,7 +97,9 @@ exports.update_application_score = (req, res, next) => {
       future_expansion_score,
       replicability_score,
       special_merit_score,
-      comment
+      comment,
+      date_assessed,
+      total_score
     },
     { new: true, runValidators: true, context: 'query' }
   ).then(() => {

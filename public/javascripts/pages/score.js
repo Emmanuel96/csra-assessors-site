@@ -30,7 +30,7 @@ axios.get(`/api/application_score/${applicationID}`).then(score => {
   
     document.getElementById('special_merit_score').value = score.data.special_merit_score
   
-    document.getElementById('total_score').value = score.data.total_score
+    document.getElementById('total_score').innerHTML = score.data.total_score
 
     document.getElementById('comment').value = score.data.comment
   }
@@ -56,9 +56,9 @@ function submitScore() {
   let today  = new Date()
   let date_assessed = today.toLocaleDateString("en-US", options)
 
-  let total = csr_benefit_score + env_benefit_score + social_benefit_score + staff_benefit_score + wrk_benefit_score + charitable_benefit_score + financial_benefit_score + commitment_score + evidence_score + degree_of_originality_score + future_expansion_score + replicability + special_merit_score
+  let total_score = Number(csr_benefit_score) + Number(env_benefit_score) + Number(social_benefit_score) + Number(staff_benefit_score) + Number(wrk_benefit_score) + Number(charitable_benefit_score) + Number(financial_benefit_score) + Number(commitment_score) + Number(evidence_score) + Number(degree_of_originality_score) + Number(future_expansion_score) + Number(replicability) + Number(special_merit_score)
 
-  console.log(total)
+  console.log(total_score)
 
   if(!csr_benefit_score || !env_benefit_score || !social_benefit_score || !staff_benefit_score || !wrk_benefit_score || !charitable_benefit_score || !financial_benefit_score || !commitment_score || !evidence_score || !degree_of_originality_score || !future_expansion_score || !replicability || !special_merit_score){
     Swal.fire({
@@ -92,8 +92,10 @@ function submitScore() {
       special_merit_score: special_merit_score,
       comment: comment,
       date_assessed: date_assessed,
-      total_score: total
+      total_score: total_score
     }
+
+    console.log(data)
 
     axios.post(`/api/score/application/${applicationID}`, data).then(res => {
       console.log(res.data)
@@ -131,7 +133,9 @@ function submitScore() {
               future_expansion_score: future_expansion_score,
               replicability_score: replicability,
               special_merit_score: special_merit_score,
-              comment: comment
+              comment: comment,
+              total_score: total_score,
+              date_assessed: date_assessed
             }
             axios.put(`/api/update_score/application/${applicationID}`, data).then(() => {
               Swal.fire('Score was updated successfully', '', 'success')

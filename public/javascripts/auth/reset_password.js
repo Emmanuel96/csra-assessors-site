@@ -1,3 +1,5 @@
+let token = window.location.href.split('/').pop()
+
 function resetPassword(){
   event.preventDefault()
 
@@ -5,7 +7,6 @@ function resetPassword(){
   let confirm_password = document.getElementById('confirm_password').value
 
   let data = { password, confirm_password }
-  let token = window.location.href.split('/').pop()
 
   if (!password || !confirm_password) {
     Swal.fire({
