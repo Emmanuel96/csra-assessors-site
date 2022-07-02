@@ -36,13 +36,12 @@
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
     "postcss-cli": "^9.1.0",
-    "util": "^0.12.4"
-  },
-  "devDependencies": {
+    "util": "^0.12.4",
     "autoprefixer": "^10.4.7",
     "eslint": "^8.15.0",
     "nodemon": "^2.0.16",
     "postcss": "^8.4.13",
     "tailwindcss": "^3.0.24"
-  }
+  },
+  "devDependencies": {}
 }
