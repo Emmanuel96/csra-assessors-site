@@ -6,5 +6,11 @@
   </head>
   <body>
     <h1 class="text-green-700 font-bold text-center p-5 text-3xl">Welcome to <%= title %> assessors prtal</h1>
+
+    <form class="h-full w-full mx-auto" action="/api/auth/logout?_method=DELETE" method="POST">
+      <button class="py-[0.5rem] text-center px-5 ml-3 bg-[#00A19A] text-white hover:bg-[#0b8781] font-bold transition delay-75 duration-75 ease-linear hover:shadow-sm rounded-md">
+        Logout
+      </button>
+    </form> 
   </body>
 </html>

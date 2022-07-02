@@ -9,7 +9,7 @@ axios.get('/api/assessed_applications').then(res => {
 
       <p class="mt-2 text-[#585856]">${application.email_address}</p>
 
-      <button class="text-sm rounded-md text-white bg-[#00A19A] py-1 mt-3 px-3 hover:bg-[#068882] hover:shadow-md">
+      <button class="text-sm rounded-md border-2 text-white bg-[#00A19A] py-1 mt-3 px-3 hover:bg-[#068882] hover:shadow-md">
         <a href="/application_score_details/${application._id}">
           View scores
         </a>  
