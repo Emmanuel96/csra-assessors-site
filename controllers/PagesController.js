@@ -78,8 +78,6 @@ exports.update_application_score = (req, res, next) => {
     date_assessed,
     total_score
   } = req.body
-
-  console.log(req.body.total_score)
   
   Score.findOneAndUpdate(
     { application: applicationID, assessorID: req.user._id.toString() },
@@ -147,6 +145,22 @@ exports.score_application = (req, res, next) => {
           newScore.save().then(() => {
             logger.info("Score saved!")
             res.status(200).json({ success: true, message: "Score saved!" })
+          }).then(() => {
+            // checks if application is scored by 3 assesors and updates 'scoredByAssessors' to true
+            Score.find({ applicationID: req.params.id }).then(scores => {
+              let ID = req.params.id
+              if(scores.length === 3){
+                Application.findByIdAndUpdate(
+                  ID, 
+                  { scoredByAssessors: true },
+                  { new: true, runValidators: true, context: 'query' }
+                ).then(() => {
+                  logger.info("Jackpot, application has been scored by 3 assessors")
+                })
+              }else{
+                logger.info("Only", scores.length, " have scored this application")
+              }
+            })
           })
         } else{
           logger.info("This application has been scored by 3 assesors already. Proceed to the next application")
@@ -154,22 +168,6 @@ exports.score_application = (req, res, next) => {
         }
       })
     }
-  }).then(() => {
-    // checks if application is scored by 3 assesors and updates 'scoredByAssessors' to true
-    Score.find({ applicationID: req.params.id }).then(scores => {
-      let ID = req.params.id
-      if(scores.length === 3){
-        Application.findByIdAndUpdate(
-          ID, 
-          { scoredByAssessors: true },
-          { new: true, runValidators: true, context: 'query' }
-        ).then(() => {
-          logger.info("Jackpot, application has been scored by 3 assessors")
-        })
-      }else{
-        logger.info("Only", scores.length, " have scored this application")
-      }
-    })
   })
 }
 

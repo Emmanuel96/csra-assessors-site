@@ -82,12 +82,28 @@ function handleScore() {
 }
 
 function downloadFiles(){
-  fetch(`/api/media/download/${applicationID}`)
-    .then((res) => { return res.blob() })
-    .then((data) => {
+  document.getElementById("dwnld_btn").innerText = "Please wait"
+  document.getElementById("dwnld_btn").disabled = true
+
+  fetch(`/api/media/download/${applicationID}`).then(res => {
+    if(res.status === 400){
+      document.getElementById("dwnld_btn").innerText = "Download attached files"
+      document.getElementById("dwnld_btn").disabled = false
+
+      return Swal.fire({
+        title: "The application has no attached files",
+        confirmButtonColor: "#00a19a",
+      })
+    }
+
+    res.blob().then((data) => {
+      document.getElementById("dwnld_btn").innerText = "Download attached files"
+      document.getElementById("dwnld_btn").disabled = false
+
       let a = document.createElement("a");
       a.href = window.URL.createObjectURL(data);
       a.download = "attached.zip";
       a.click();
     })
+  })
 }

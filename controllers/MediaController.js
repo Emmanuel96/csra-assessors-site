@@ -43,8 +43,9 @@ exports.download_all = async (req, res, next) => {
     })
 
     fs.writeFileSync("/tmp/attached.zip", zip.toBuffer())
-    res.download("/tmp/attached.zip")
+    res.status(200).download("/tmp/attached.zip")
   } catch (err) {
+    console.log("no files for this user")
     res.status(400).end()
   }
 }

@@ -58,8 +58,6 @@ function submitScore() {
 
   let total_score = Number(csr_benefit_score) + Number(env_benefit_score) + Number(social_benefit_score) + Number(staff_benefit_score) + Number(wrk_benefit_score) + Number(charitable_benefit_score) + Number(financial_benefit_score) + Number(commitment_score) + Number(evidence_score) + Number(degree_of_originality_score) + Number(future_expansion_score) + Number(replicability) + Number(special_merit_score)
 
-  console.log(total_score)
-
   if(!csr_benefit_score || !env_benefit_score || !social_benefit_score || !staff_benefit_score || !wrk_benefit_score || !charitable_benefit_score || !financial_benefit_score || !commitment_score || !evidence_score || !degree_of_originality_score || !future_expansion_score || !replicability || !special_merit_score){
     Swal.fire({
       title: "Please score all categories",
@@ -95,21 +93,28 @@ function submitScore() {
       total_score: total_score
     }
 
-    console.log(data)
+    document.getElementById("submit_btn").innerText = "Submitting..."
+    document.getElementById("submit_btn").disabled = true
 
-    axios.post(`/api/score/application/${applicationID}`, data).then(res => {
-      console.log(res.data)
+    axios.post(`/api/score/application/${applicationID}`, data).then(() => {
+      document.getElementById("submit_btn").innerText = "Submit"
+      document.getElementById("submit_btn").disabled = false
+
       Swal.fire({
         title: "Sucessfully Scored Application",
         confirmButtonColor: "#00a19a",
       });
     }).catch((error) => {
+      document.getElementById("submit_btn").innerText = "Submit"
+      document.getElementById("submit_btn").disabled = false
+
       if(error.response.data.message === "You have already scored this application before"){
         Swal.fire({
           title: 'You have already scored this application before. Do you want to update score?',
           showDenyButton: true,
           showCancelButton: true,
           confirmButtonText: 'Yes',
+          confirmButtonColor: '#00a19a',
           denyButtonText: 'No',
           customClass: {
             actions: 'my-actions',
