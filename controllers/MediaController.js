@@ -42,6 +42,10 @@ exports.download_all = async (req, res, next) => {
       zip.addFile(file.Key, parsedFiles[i])
     })
 
+    if(filesToDownload < 1){
+      return res.status(400).end()
+    }
+
     fs.writeFileSync("/tmp/attached.zip", zip.toBuffer())
     res.status(200).download("/tmp/attached.zip")
   } catch (err) {
