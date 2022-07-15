@@ -150,4 +150,125 @@ axios.get(`/api/all_application_scores/${applicationID}`).then((res) => {
   } else if(scores[2].total_score >= 104 && scores[2].total_score <= 130){
     document.getElementById('award_3').innerHTML = "Gold"
   }
+
+  function switchFunction(arrVal){
+    switch (arrVal) {
+      case 'csr_benefit_score':
+        outputText = "Clear CSR Impact";
+        break;
+      case 'environmental_benefit_score':
+        outputText = "Environmental Benefits";
+        break;
+      case 'social_benefit_score':
+         outputText = "Social Benefit";
+        break;
+      case 'staff_benefit_score':
+        outputText = "Staff Benefit";
+        break;
+      case 'workplace_benefit_score':
+        outputText = "Workplace Benefit";
+        break;
+      case 'charitable_benefit_score':
+        outputText = "Charitable Benefit";
+        break;
+      case 'financial_benefit_score':
+        outputText = "Financial Benefit";
+        break;
+      case 'commitment_score':
+        outputText = "Commitment of the entrants";
+        break;
+      case 'evidence_score':
+        outputText = "Evidence of measurable impact";
+        break;  
+      case 'degree_of_originality_score':
+        outputText = "Degree of originality/innovation";
+        break;  
+      case 'future_expansion_score':
+        outputText = "Future expansion";
+        break; 
+      case 'replicability_score':
+        outputText = "Replicability";
+        break;    
+      case 'special_merit_score':
+        outputText = "Special Merit";
+    }
+    return outputText
+  }
+
+  function sortLowestThree(obj){
+    let sortable = Object.entries(obj).filter(i => {
+      if (typeof i[1] === 'number'){
+        return i
+      }
+    })
+
+    sortable.sort(function(a, b) {
+      return a[1] - b[1]
+    })
+  
+    let lowestThree = sortable.slice(0, 3)
+
+    return lowestThree
+  }
+
+  function sortHighestThree(obj){
+    let sortable = Object.entries(obj).filter(i => {
+      if (typeof i[1] === 'number'){
+        return i
+      }
+    })
+
+    sortable.sort(function(a, b) {
+      return a[1] - b[1]
+    })
+  
+    let highestThree = sortable.slice(-3)
+
+    return highestThree
+  }
+
+  // Assessor 1 section three lowest scores display
+  document.getElementById('1_lowest_1').innerHTML = switchFunction(sortLowestThree(scores[0])[0][0])
+
+  document.getElementById('1_lowest_2').innerHTML = switchFunction(sortLowestThree(scores[0])[1][0])
+
+  document.getElementById('1_lowest_3').innerHTML = switchFunction(sortLowestThree(scores[0])[2][0])
+
+  // Assessor 1 section three highest scores display
+  document.getElementById('1_highest_1').innerHTML = switchFunction(sortHighestThree(scores[0])[0][0])
+
+  document.getElementById('1_highest_2').innerHTML = switchFunction(sortHighestThree(scores[0])[1][0])
+
+  document.getElementById('1_highest_3').innerHTML = switchFunction(sortHighestThree(scores[0])[2][0])
+
+
+  // Assessor 2 section three lowest scores display
+  document.getElementById('2_lowest_1').innerHTML = switchFunction(sortLowestThree(scores[1])[0][0])
+
+  document.getElementById('2_lowest_2').innerHTML = switchFunction(sortLowestThree(scores[1])[1][0])
+
+  document.getElementById('2_lowest_3').innerHTML = switchFunction(sortLowestThree(scores[1])[2][0])
+
+  // Assessor 2 section three highest scores display
+  document.getElementById('2_highest_1').innerHTML = switchFunction(sortHighestThree(scores[1])[0][0])
+
+  document.getElementById('2_highest_2').innerHTML = switchFunction(sortHighestThree(scores[1])[1][0])
+
+  document.getElementById('2_highest_3').innerHTML = switchFunction(sortHighestThree(scores[1])[2][0])
+
+
+  // Assessor 3 section three lowest scores display
+  document.getElementById('3_lowest_1').innerHTML = switchFunction(sortLowestThree(scores[2])[0][0])
+
+  document.getElementById('3_lowest_2').innerHTML = switchFunction(sortLowestThree(scores[2])[1][0])
+
+  document.getElementById('3_lowest_3').innerHTML = switchFunction(sortLowestThree(scores[2])[2][0])
+
+  // Assessor 3 section three highest scores display
+  document.getElementById('3_highest_1').innerHTML = switchFunction(sortHighestThree(scores[2])[0][0])
+
+  document.getElementById('3_highest_2').innerHTML = switchFunction(sortHighestThree(scores[2])[1][0])
+
+  document.getElementById('3_highest_3').innerHTML = switchFunction(sortHighestThree(scores[2])[2][0])
+
 })

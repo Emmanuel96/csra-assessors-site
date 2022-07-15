@@ -68,7 +68,7 @@ const ScoreSchema = new mongoose.Schema({
   },
 
   total_score: {
-    type: Number
+    type: String
   },
 
   comment: {

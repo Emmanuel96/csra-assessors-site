@@ -90,7 +90,7 @@ function submitScore() {
       special_merit_score: special_merit_score,
       comment: comment,
       date_assessed: date_assessed,
-      total_score: total_score
+      total_score: total_score.toString()
     }
 
     document.getElementById("submit_btn").innerText = "Submitting..."
@@ -139,9 +139,10 @@ function submitScore() {
               replicability_score: replicability,
               special_merit_score: special_merit_score,
               comment: comment,
-              total_score: total_score,
+              total_score: total_score.toString(),
               date_assessed: date_assessed
             }
+
             axios.put(`/api/update_score/application/${applicationID}`, data).then(() => {
               Swal.fire('Score was updated successfully', '', 'success')
             }).catch(() => {
